@@ -11,6 +11,61 @@ cambiar la version en el xml
 
 ionic cordova build --release android
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore tasky.keystore C:\Users\anava\Documents\Tasky-Firebase\tasky\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky
-C:\Users\anava\AppData\Local\Android\Sdk\build-tools\30.0.3\zipalign -v 4 platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky.apk
+C:\Users\anava\AppData\Local\Android\Sdk\build-tools\30.0.3\zipalign -v 4 platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky-last.apk
 
 clave: 123456
+
+# angular.jsn output 'www' (apk)
+#para pwa es public
+
+Pasos para transformar a PWA
+
+1. ng add @angular/pwa
+ionic build --service-worker       
+2. firebase init
+
+firebase.json
+{
+  "hosting": {
+    "public": "public",
+    "site": "taskyapp01",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/build/app/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "ngsw-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+3. firebase deploy --only hosting:taskyapp01
+
+
+#para actualizar
+ng build 
+firebase deploy
