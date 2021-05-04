@@ -1,0 +1,67 @@
+<app-header nombre="perfil"></app-header>
+
+<ion-content>
+ 
+    <ion-searchbar
+    color="light" 
+    placeholder = "Buscar comentario..."
+    animated
+    (ionChange)="buscar($event)">
+    </ion-searchbar>
+
+  <ng-container *ngFor="let comentario of comentarios  | filtroComentarios: textoBuscar" >
+    <ng-container *ngIf="comentario.Materia == idMateria && comentario.Ayudante == miID">
+     <ng-container *ngFor="let usuario of usuarios">
+      <ion-card *ngIf="usuario.id == comentario.Estudiante">
+        <ion-card-header>
+          <ion-item>
+            <ion-avatar>
+              <img src="{{usuario.FotoPerfil}}">
+            </ion-avatar>
+            
+            <ion-label style="margin-left: 7.5px;">{{usuario.Nombre}} {{usuario.Apellido}}</ion-label>
+            
+
+           
+          </ion-item>
+
+        </ion-card-header>
+
+        
+          <!-- <ion-item style="margin-top: 7.5px;">
+            
+          </ion-item> -->
+        <ion-card-content>
+   
+            <ion-label>{{comentario.Comentario}}</ion-label>
+
+     
+        </ion-card-content>
+        <ion-item>
+          {{comentario.Fecha | date:'yyyy/MM/dd'}}
+        </ion-item>
+        
+        
+           
+      </ion-card>
+
+
+      </ng-container>
+     
+    </ng-container>
+  </ng-container>
+
+
+  <ng-container *ngIf="getDatos()">
+
+    <div style="margin-top: 50px;" align='center'> 
+      <ion-text color="medium">
+
+        <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FmisComentarios.jpg?alt=media&token=37b6fb51-61a0-47a4-bca6-0e6a8a7447fb" style="width: 55%; height:62%;" alet="foto">
+        
+        <p style="font-size: 21px;">No tienes comentarios.</p>
+      </ion-text>  
+    </div>
+  </ng-container>
+ 
+</ion-content>

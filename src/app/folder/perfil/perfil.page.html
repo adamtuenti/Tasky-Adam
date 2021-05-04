@@ -1,0 +1,172 @@
+<app-header nombre="perfil"></app-header>
+
+<ion-content *ngIf='user.Estado == "A"'>
+
+  <ion-toolbar>
+  
+    <ion-segment color="tertiary" value="perfil">
+
+      
+      <ion-segment-button value="perfil" [routerLink]="['/chat-room']" routerDirection="root">
+        <ion-icon name="accessibility-outline" size="large"></ion-icon> <ion-label>Mi perfil</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="chat" (click) = 'validarCitas()' routerDirection="root">
+        <ion-icon name="rocket-outline" size="large"></ion-icon> <ion-label>Chat</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+  </ion-toolbar>
+
+  <ion-card>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide style="height: 325px;width: 85%;margin: auto">
+        <ion-button  expand="full" href="{{user.FotoPerfil}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{user.FotoPerfil}}" style="height: 275px;width: 100%;"></ion-img></ion-button>
+      </ion-slide>
+      <ion-slide *ngIf='user.Foto2!=""' style="height: 325px;width: 85%;margin: auto">
+        <ion-button expand="full" href="{{user.Foto2}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{user.Foto2}}" style="height: 275px;width: 100%;"></ion-img></ion-button>
+      </ion-slide>
+      
+    </ion-slides>
+
+  </ion-card>
+
+  
+  <!-- <ion-img class="circle-pic"  src="{{user.FotoPerfil}}" ></ion-img> -->
+
+  <ion-card>
+    <ion-item>
+      <ion-icon name="person-outline" size="large" style="margin-right: 8px;"></ion-icon>
+      <ion-label style="font-size: 17px;">{{user.Nombre}} {{user.Apellido}}</ion-label>
+    </ion-item>
+  
+    <ion-item>
+      <ion-icon name="mail-outline" size="large" style="margin-right: 8px;"></ion-icon>
+      <ion-label style="font-size: 17px;">{{user.Correo}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="call-outline" size="large" style="margin-right: 8px;"></ion-icon>
+      <ion-label style="font-size: 17px;">{{user.Telefono}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="megaphone-outline" size="large" style="margin-right: 8px;"></ion-icon>
+      <ion-label style="font-size: 17px;">{{user.Publicaciones}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="paw-outline" size="large" style="margin-right: 8px;"></ion-icon>
+      <ion-label style="font-size: 17px;">{{user.Rol}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon routerLink="/perfil-update" name="create-outline" size="large" style="margin-right: 8px;" layout="icon-end" slot="end"></ion-icon>
+
+    </ion-item>
+  
+  </ion-card>
+
+  <div align="center" style="align-items: center;justify-content: center;align-content: center;margin-top:15.5px;margin-bottom: 7.5px;">
+
+    
+    <ion-item *ngIf="user.Rol == 'Ayudante'" style="margin-top: 5px;">
+      <ion-button  style="width: 250px;height: 45px;margin:auto;" [routerLink]="['/mis-ayudantias']">
+        <ion-icon name="file-tray-stacked-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Mis Cursos</ion-label>
+      </ion-button>
+
+    </ion-item>
+
+    <ion-item *ngIf="user.Rol == 'Estudiante'" style="margin-top: 5px;">
+      <ion-button  style="width: 250px;height: 45px;margin:auto;" (click)="serAyudante()" color="success">
+        <ion-icon name="school-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Ser ayudante</ion-label>
+      </ion-button>
+
+    </ion-item>
+    
+
+    
+    <ion-item *ngIf="user.Rol == 'Ayudante' && user.Premium==false" style="margin-top: 5px;">
+      <ion-button  style="width: 250px;height: 45px;margin:auto;" (click)="serPremium()" color="success">
+        <ion-icon name="school-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Ser premium</ion-label>
+      </ion-button>
+
+    </ion-item>
+
+    <!-- <ion-item style="margin-top: 5px;">
+      <ion-button  style="width: 250px;height: 45px;margin:auto;" [routerLink]="['/mis-chat']" color="success">
+        <ion-icon name="people-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Chat</ion-label>
+      </ion-button>
+
+    </ion-item> -->
+    
+
+    <ion-item style="margin-top: 5px;margin-bottom: 10px;">
+      <ion-button style="width: 250px;height: 45px;margin-top:12.5px;margin:auto;" color="danger" (click)="logOutUser()">
+        <ion-icon name="log-out-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Cerrar Sesión</ion-label>
+      </ion-button>
+
+    </ion-item>
+
+    <!-- <ion-item style="margin-top: 5px;margin-bottom: 10px;">
+      <ion-button style="width: 250px;height: 45px;margin-top:12.5px;margin:auto;" color="danger" (click)="enviarMensaje()">
+        <ion-icon name="log-out-outline" size="large" style="margin-right: 8px;"></ion-icon>
+        <ion-label style="font-size: 17px;">Mensaje</ion-label>
+      </ion-button>
+
+    </ion-item> -->
+
+    
+
+
+  
+  
+</div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/sugerencias">
+     <ion-icon name="help-circle-outline" size="large"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+<ion-content *ngIf='user.Estado == "P"'>
+
+  <div align='center' style="margin-bottom: 10px;margin-top: 75px;width: 85%;margin-left: 7.5%;">
+   
+      <ion-label style="font-size:19.5px;text-align: center;margin:auto">Estamos verificando su cuenta!</ion-label>
+  
+  
+  </div>
+  
+  <ion-img style="margin:auto;width: 225px;height: 350px;margin-top:5px;" src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2Finspector.jpg?alt=media&token=df26d9dd-ffad-4f7a-bcef-b33c8c0c6584" alt="hola"></ion-img>
+  
+  <div align="center" style="margin-top:15px">
+    <ion-button style="margin:auto;" (click)="logOutUser()">Cerrar Sesión</ion-button>
+  </div>
+  
+  
+  
+</ion-content>
+
+
+<style>
+  .circle-pic {     
+    width: 55%;
+    height: 35%;
+    margin: auto;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-width: 50px; */
+
+  }
+</style>

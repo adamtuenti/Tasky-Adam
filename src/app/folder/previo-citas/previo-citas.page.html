@@ -1,0 +1,89 @@
+<app-header nombre="citas"></app-header>
+
+<ion-content>
+
+<form #form="ngForm" (ngSubmit)="registrarCita(form)">
+      <ion-list>  
+        
+        
+      
+      <ion-card style="margin-top:15px">
+        <ion-item>
+          <ion-label>Acerca de ti</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-textarea required placeholder="Ingresa tu descripción" name="descripcion" type='text' ngModel required></ion-textarea>
+        </ion-item>
+
+
+
+      </ion-card>
+      
+      <ion-card style="margin-top:15px">
+        <ion-item>
+          <ion-label>Tu sexo: </ion-label>
+          <ion-select required  name='sexo' ngModel>
+           
+                  <ion-select-option value="M">Hombre</ion-select-option>
+                  <ion-select-option value="F">Mujer</ion-select-option>
+          
+          </ion-select>
+
+        </ion-item>
+        
+  
+      </ion-card>
+      
+    <ion-card style="margin-top:15px">
+      <ion-item>
+        <ion-label>Buscas: </ion-label>
+        <ion-select required  name='busca' ngModel>
+         
+                <ion-select-option value="M">Hombres</ion-select-option>
+                <ion-select-option value="F">Mujeres</ion-select-option>
+        
+        </ion-select>
+
+      </ion-item>
+      
+    </ion-card>
+    
+    <ion-card>
+      <ion-item>
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label style="margin-left:7.5px">Fecha de Nacimiento</ion-label>
+        <ion-datetime value="1996-05-15" name="nacimiento" placeholder="Seleccionar" required ngModel></ion-datetime>
+      </ion-item>
+
+    </ion-card>
+
+    
+
+    <!-- <ion-card>
+
+      <ion-item>
+        <ion-icon name="image-outline"></ion-icon> <ion-text style="margin-left:7.5px">Foto de perfil</ion-text>
+      
+        <ion-input type='file' accept="image/*" id="myFileInput" name="foto" (change)="readURL($event);" class="fileInput" ngModel required></ion-input>
+      </ion-item>
+
+    </ion-card> -->
+
+
+    
+
+      
+      </ion-list>
+
+        <ion-button  style="width: 150px;margin:auto;" type="submit"  [disabled]="form.invalid" expand="block">
+          Guardar
+        </ion-button>
+    </form>
+
+</ion-content>
+<style>
+  #myFileInput{
+    position: absolute;
+    opacity: 0;
+  }
+</style>

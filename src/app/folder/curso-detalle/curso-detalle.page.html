@@ -1,0 +1,93 @@
+<app-header nombre="cursos"></app-header>
+<ion-content>
+  <ion-toolbar>
+
+
+  
+  <ion-segment color="tertiary" value="anuncios">
+
+
+
+
+
+
+    <ion-segment-button value="anuncios" [routerLink]="['/curso-detalle',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="megaphone-outline" size="large"></ion-icon> 
+      <ion-label>Anuncios</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="ayudantes" [routerLink]="['/curso-ayudantes',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-outline" size="large"></ion-icon> <ion-label>Ayudantes</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="grupos" [routerLink]="['/grupos',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-circle-outline" size="large"></ion-icon> <ion-label>Grupos</ion-label>
+    </ion-segment-button>
+
+    
+
+
+   
+  </ion-segment>
+
+</ion-toolbar>
+
+  <ion-searchbar
+    color="light" 
+    placeholder = "Buscar anuncio..."
+    animated
+    (ionChange)="buscar($event)">
+  </ion-searchbar>
+
+
+  <ng-container *ngIf="!condicionVacia">
+    <ng-container *ngFor="let publicacion of publicaciones | filtroAnuncio: textoBuscar">
+      <ion-card> 
+        <ion-card-header>
+          <ion-item>
+            <ion-card-title  (click)='aumentarVisita(publicacion.id,publicacion)'>{{publicacion.Titulo}}</ion-card-title>
+     
+            <ion-button fill="outline" slot='end' (click)='aumentarVisita(publicacion.id,publicacion)'><ion-icon name="eye-outline" ></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{publicacion.Visitas}}</label></ion-button>
+            
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content  (click)='aumentarVisita(publicacion.id,publicacion)'>
+          {{publicacion.Descripcion}}
+        </ion-card-content>
+      
+        <ng-container >
+          <ion-item>
+            <label>{{publicacion.Fecha | date:'yyyy/MM/dd'}}</label>
+            <ion-icon *ngIf="miId == publicacion.Estudiante" name="create-outline" slot='end'  (click)="redireccionar(publicacion.id)"></ion-icon>
+            <ion-icon *ngIf="miId == publicacion.Estudiante" name="trash-outline" slot='end' color='danger'(click)="alert(publicacion.id)"></ion-icon>
+
+          </ion-item>
+
+         
+          
+        </ng-container>
+
+        
+
+      </ion-card>
+      
+    </ng-container>
+   
+  </ng-container>
+
+  <ng-container *ngIf="condicionVacia">
+    <br><br><br><br><br><br>
+    <div class="ion-text-center">
+      <ion-text color="medium">
+        <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FcursoDetalle.png?alt=media&token=76e0ec61-732c-48bd-a271-a23c0bb9b2c1" style="width: 350px; height: 270px;" alet="foto">
+        <p style="font-size: 25px;">No hay anuncios registrados.</p>
+      </ion-text>  
+    </div>   
+  </ng-container>
+
+  <ion-fab  *ngIf="rol=='Ayudante'" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="validarCurso()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

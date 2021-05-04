@@ -1,0 +1,111 @@
+<app-header nombre="adopcion"></app-header>
+
+<ion-content>
+
+  <ion-toolbar>
+  
+    <ion-segment color="tertiary" value="mascotas">
+
+      
+      <ion-segment-button value="mascotas" [routerLink]="['/adopcion']" routerDirection="root">
+        <ion-icon name="fish-outline" size="large"></ion-icon> <ion-label>Mascotas</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="veterinarios" [routerLink]="['/veterinarios']" routerDirection="root">
+        <ion-icon name="heart-circle-outline" size="large"></ion-icon> <ion-label>Veterinarios</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+  </ion-toolbar>
+
+
+  <ion-searchbar
+    color="light" 
+    placeholder = "Buscar mascota..."
+    animated
+
+    (ionChange)="buscar($event)">
+    </ion-searchbar>
+
+    <ion-item>
+      <ion-label>Filtrar por:</ion-label> 
+      <ion-select #filtro value= '' placeholder='Seleccione ' (ionChange)='onChange(filtro.value)'>
+        <ion-select-option selected value=''>Todos</ion-select-option>
+        <ion-select-option value='A'>Aves</ion-select-option>
+        <ion-select-option value='G'>Gatos</ion-select-option>
+        <ion-select-option value='P'>Perros</ion-select-option>
+        <ion-select-option value='O'>Otros</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+  <ng-container *ngIf="!getDatos()">
+    <ng-container *ngFor="let adopcion of adopciones | filtroAdopcion: textoBuscar">
+      
+      <ion-card *ngIf="adopcion.Tipo == opcionfiltro ||  false== opcionfiltro" style="padding: 5px;">
+        <ion-item  (click)='aumentarVisita(adopcion.id,adopcion)'>
+         
+          <ion-avatar style="height: 50px;width: 50px;margin-right: 7.5px;">
+            <img  src="{{adopcion.Foto1}}">
+          </ion-avatar>
+
+
+          <ion-card-title>{{adopcion.Titulo}}</ion-card-title>  
+
+          
+          
+            <img *ngIf="adopcion.Tipo == 'P'" slot='end' style = 'width: 45px;height: 45px;' src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/Animales%2Fdog.png?alt=media&token=181088e4-85a4-4f4a-a31b-a5e561bd3c23">
+          
+
+          
+          <img *ngIf="adopcion.Tipo == 'G'" slot='end' style = 'width: 45px;height: 45px;' src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/Animales%2Fcat.png?alt=media&token=add2efa5-39bc-4fd1-8f33-e245f216ffc1">
+          
+
+          
+          <img  *ngIf="adopcion.Tipo == 'A'" slot='end' style = 'width: 45px;height: 45px;' src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/Animales%2Fbird.png?alt=media&token=ab0cbd77-b221-4b10-b315-7fa48777adef">
+          
+          
+          <img slot='end' style = 'width: 45px;height: 45px;' *ngIf="adopcion.Tipo == 'O'" src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/Animales%2Fother.png?alt=media&token=349e8158-88d9-442d-a164-32f0c78627ba">
+
+
+        </ion-item>       
+        
+        
+          
+
+          
+       
+     
+        <!-- <ion-card-content (click)='aumentarVisita(adopcion.id,adopcion)'>
+          {{adopcion.Descripcion}}
+        </ion-card-content>
+
+        <ng-container > -->
+          <ion-item *ngIf="miId == adopcion.Usuario">
+            
+            <!-- <label>{{adopcion.Fecha | date:'yyyy/MM/dd'}}</label> -->
+            
+            <ion-icon  name="create-outline" slot='end'  [routerLink]="['/adopcion-editar',adopcion.id]"></ion-icon>
+            <ion-icon name="trash-outline" slot='end' color='danger'(click)="alert(adopcion.id)"></ion-icon>
+            <ion-button fill="outline" slot='end' (click)='aumentarVisita(adopcion.id,adopcion)'><ion-icon name="eye-outline"></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{adopcion.Visitas}}</label></ion-button>
+          </ion-item>
+
+       
+        
+
+        
+      </ion-card>
+      
+      
+    </ng-container>
+  </ng-container>
+
+  
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/adopcion-crear']" routerDirection="root">
+     <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+ 

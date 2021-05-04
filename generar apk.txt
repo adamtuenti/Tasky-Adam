@@ -1,0 +1,16 @@
+#link: https://www.nigmacode.com/ionic/exportar-y-firmar-apk-en-ionic/#:~:text=Generar%20y%20firmar%20la%20APK&text=Debemos%20escribir%20el%20nombre%20de,escribimos%20cuando%20generamos%20la%20firma.&text=En%20primer%20lugar%2C%20escribiremos%20el,de%20nuestra%20apk%20ya%20optimizada.
+
+1)ionic cordova build --release android
+2)keytool -genkey -v -keystore tasky.keystore -alias tasky -keyalg RSA -keysize 2048 -validity 10000
+3)jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore tasky.keystore platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky
+4)C:\Users\anava\AppData\Local\Android\Sdk\build-tools\30.0.3\zipalign -v 4 platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk taskyapp.apk
+
+
+#actualizar app en play store
+cambiar la version en el xml 
+
+ionic cordova build --release android
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore tasky.keystore C:\Users\anava\Documents\Tasky-Firebase\tasky\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky
+C:\Users\anava\AppData\Local\Android\Sdk\build-tools\30.0.3\zipalign -v 4 platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk tasky.apk
+
+clave: 123456

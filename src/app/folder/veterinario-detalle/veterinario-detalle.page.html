@@ -1,0 +1,109 @@
+<app-header nombre="adopcion"></app-header>
+
+<ion-content>
+
+    <ion-toolbar>
+
+
+    
+      <ion-segment color="tertiary" value="datos">
+    
+        <ion-segment-button value="datos" [routerLink]="['/veterinario-detalle', id]" routerDirection="root">
+          <ion-icon name="information-circle-outline" size="large"></ion-icon> 
+          <ion-label>Datos</ion-label>
+        </ion-segment-button>
+        
+        <ion-segment-button value="comentarios" [routerLink]="['/comentario-veterinario', id]" routerDirection="root">
+          <ion-icon name="chatbubbles-outline" size="large"></ion-icon> <ion-label>Comentarios</ion-label>
+        </ion-segment-button>
+    
+    
+    
+      
+      </ion-segment>
+    
+    </ion-toolbar>
+
+ 
+
+    <!-- <div align='center' style='margin:auto;margin-top:7.5px'>
+      <ion-label style='margin:auto; font-weight: bold;font-size:19.2px'>{{usuario.Nombres}} {{usuario.Apellidos}}</ion-label>
+
+    </div> -->
+
+  <ion-card>
+
+    
+
+    
+
+    <ion-item>
+
+      <ion-img id="blah" src="{{usuario.Foto}}" alt="your image" style="margin-top:1.5px;margin-bottom: 2.5px;height: 325px;width: 325px;"></ion-img>
+
+    </ion-item>
+
+    <ion-item>
+      <label style='margin:auto;'>{{usuario.Descripcion}}</label>
+    </ion-item>
+    <!-- <ion-img src="{{usuario.FotoPerfil}}" style="margin-top:7.5px;margin-bottom: 7.5px;"></ion-img> -->
+    <!-- <ion-card-header>
+      <ion-card-title>Correo: {{usuario.Correo}}</ion-card-title>
+    </ion-card-header> -->
+
+    
+    <ion-item style="margin-top: 7.5px;">
+      <ion-icon name="person-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon>
+      <ion-label>{{usuario.Nombres}} {{usuario.Apellidos}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <a href= 'https://api.whatsapp.com/send?phone={{usuario.Telefono}}'><ion-icon name="logo-whatsapp" size="large" color="success" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>{{usuario.Telefono}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <a href="{{usuario.RedSocial}}"><ion-icon name="logo-facebook" size="large" color="primary" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>{{usuario.RedSocial}}</ion-label>
+    </ion-item>
+
+    <ion-item style="margin-top: 7.5px;">
+      <ion-icon name="locate-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon>
+      <ion-label>{{usuario.Direccion}}</ion-label>
+    </ion-item>
+
+    <!-- <ion-item>
+
+      
+      <ion-icon name="mail-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon>
+     
+      <a href="mailto:adanavarrete15@gmail.com">Enviar</a>
+      <ion-label>Correo: {{usuario.Correo}}</ion-label>
+    </ion-item> -->
+
+    
+  </ion-card>
+
+  <div align="center" *ngIf="myId!=id">
+
+    <ion-button disabled = "{{click}}" color = "primary" fill="outline" style="height: 45px;" (click)="like()">
+      <ion-icon size="large" name="thumbs-up-outline" ></ion-icon>
+    </ion-button>
+    <ion-button disabled = "{{click}}" color="danger" style="margin-left: 5.5px;height: 45px;" fill="outline"  (click)="dislike()">
+      <ion-icon size="large" name="thumbs-down-outline" ></ion-icon>
+    </ion-button>
+ 
+  </div>
+  
+</ion-content>
+<style>
+  ion-img {     
+    width: 35%;
+    height: 21%;
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+    border-color: aquamarine;
+  }
+</style>
+ 

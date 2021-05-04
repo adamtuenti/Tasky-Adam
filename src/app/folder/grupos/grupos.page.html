@@ -1,0 +1,71 @@
+<app-header nombre="cursos"></app-header>
+
+<ion-content>
+  <ion-segment color="tertiary" value="grupos">
+
+    <ion-segment-button value="anuncios" [routerLink]="['/curso-detalle',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="megaphone-outline" size="large"></ion-icon> <ion-label>Anuncios</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="ayudantes" [routerLink]="['/curso-ayudantes',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-outline" size="large"></ion-icon> <ion-label>Ayudantes</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="grupos" [routerLink]="['/grupos',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-circle-outline" size="large"></ion-icon> <ion-label>Grupos</ion-label>
+    </ion-segment-button>
+   
+  </ion-segment>
+
+  <ion-searchbar
+    color="light" 
+    placeholder = "Buscar grupo..."
+    animated
+    (ionChange)="buscar($event)">
+  </ion-searchbar>
+
+  <ng-container *ngFor="let grupo of grupos | filtroCurso: textoBuscar">
+
+
+  
+
+  <ion-card  *ngIf="id==grupo.Materia" scrollable class = "item">
+    <ion-item >
+
+      <ion-thumbnail slot="start" slot="start" [routerLink]="['/grupos-detalle',grupo.id]">
+        <img src="{{grupo.Imagen}}" alet="foto">
+      </ion-thumbnail>
+      <ion-card-title [routerLink]="['/grupos-detalle',grupo.id]">{{grupo.Nombre}}</ion-card-title>
+
+      <ion-icon *ngIf="miId == grupo.Usuario" name="create-outline" slot='end'  (click)="redireccionar(grupo.id)"></ion-icon>
+      <ion-icon *ngIf="miId ==  grupo.Usuario" name="trash-outline" slot='end' color='danger'(click)="alert(grupo.id)"></ion-icon>
+
+    </ion-item>
+  
+
+    </ion-card>
+
+
+</ng-container>
+
+<ng-container *ngIf="getDatos()">
+
+  <div style="margin-top: 50px;" align='center'> 
+    <ion-text color="medium">
+
+      <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2Fgrupos.png?alt=media&token=8aa84d63-18b5-424d-9b6a-dfd1075eeb77" style="width: 262px; height: 325px;margin:auto;" alet="foto">
+      
+      <p style="font-size: 21px;margin:auto;margin-top:7.5px">No hay grupos registrados.</p>
+    </ion-text>  
+  </div>
+</ng-container>
+
+  <ion-fab *ngIf="rol=='Ayudante'" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="validarCurso()">
+     <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  
+
+</ion-content>

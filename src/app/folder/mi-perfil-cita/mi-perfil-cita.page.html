@@ -1,0 +1,162 @@
+<app-header nombre="citas"></app-header>
+
+<ion-content>
+    <ion-segment color="tertiary" value="perfil">
+  
+      <ion-segment-button value="buscar" [routerLink]="['/citas']" routerDirection="root">
+        <ion-icon name="search-outline" size="large"></ion-icon> <ion-label>Buscar</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="ayudantes" [routerLink]="['/mis-chat']" routerDirection="root">
+        <ion-icon name="chatbubbles-outline" size="large"></ion-icon> <ion-label>Chats</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="perfil" [routerLink]="['/mi-perfil-cita']" routerDirection="root">
+        <ion-icon name="settings-outline" size="large"></ion-icon> <ion-label style="font-size: 12px;">Perfil</ion-label>
+      </ion-segment-button>
+  
+    </ion-segment>
+  
+ 
+      <ion-slides pager="true" [options]="slideOpts">
+
+        
+        <ion-slide style="height: 375px;width: 85%;margin: auto">
+          <ion-img src="{{user.FotoPerfil}}" style="height: 325px;width: 100%;"></ion-img>
+        </ion-slide>
+
+        <ion-slide *ngIf='user.Foto2!=""' style="height: 375px;width: 85%;margin: auto">
+          <ion-img src="{{user.Foto2}}" style="height: 325px;width: 100%;"></ion-img>
+          <!-- <ion-button expand="full" href="{{user.Foto2}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{user.Foto2}}" style="height: 275px;width: 100%;"></ion-img></ion-button> -->
+        </ion-slide>
+        
+      </ion-slides>
+  
+  
+
+
+
+    <ion-card>
+
+      <ion-card-title style='padding: 7.5px;'>
+
+        <ion-label style="font-size: 19.1px;font-weight: bold;">Acerca de ti</ion-label>
+
+      </ion-card-title>
+
+      <ion-card-content>
+        <ion-label style="font-size: 17px;">{{user.Descripcion}}</ion-label>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <ion-card>
+
+      <ion-card-title style='padding: 7.5px;'>
+
+        <ion-label style="font-size: 19.1px;font-weight: bold;">Buscas</ion-label>
+
+      </ion-card-title>
+
+      <ion-card-content>
+        <ion-label *ngIf = 'user.Busca == "F"' style="font-size: 17px;">Mujeres</ion-label>
+        <ion-label *ngIf = 'user.Busca == "M"' style="font-size: 17px;">Hombres</ion-label>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+
+
+    <!-- <ion-card style='padding: 7.5px;'>
+      <ion-label style="font-size: 19.1px;font-weight: bold;align-items: center;margin-right: 7.5px;">Buscas: </ion-label>
+      <ion-icon *ngIf = 'user.Busca == "M"' name="man-outline" size="large" color='success'></ion-icon>
+      <ion-icon *ngIf = 'user.Busca == "F"' name="woman-outline" size="large" color='success'></ion-icon>
+    </ion-card> -->
+
+    <!-- <ion-card style='padding: 7.5px;'>
+      <ion-label style="font-size: 19.1px;font-weight: bold;align-items: center;margin-right: 29.2px;">Sexo: </ion-label>
+      <ion-icon *ngIf = 'user.Sexo == "M"' name="man-outline" size="large" color='success'></ion-icon>
+      <ion-icon *ngIf = 'user.Sexo == "F"' name="woman-outline" size="large" color='success'></ion-icon>
+    </ion-card> -->
+
+  
+
+
+
+
+
+
+    <!-- <ion-item>
+      <ion-icon routerLink="/perfil-update" name="create-outline" size="large" style="margin-right: 8px;" layout="icon-end" slot="end"></ion-icon>
+
+    </ion-item> -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="settings-outline" size = 'large'></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-list side="top">
+        <ion-fab-button (click) = 'alertaDesactivar()' color = 'danger' size = 'top'>
+          <ion-icon name="log-out-outline" size="large"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button routerLink="/editar-perfil-cita" color = 'success'>
+          <ion-icon name="create-outline" size="large"></ion-icon>
+         </ion-fab-button>
+
+
+      </ion-fab-list>
+
+      
+<!-- 
+
+      <ion-fab-list side="top">
+        <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="top">
+        <ion-fab-button><ion-icon name="logo-facebook"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="start">
+        <ion-fab-button><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="end">
+        <ion-fab-button><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
+      </ion-fab-list> -->
+    </ion-fab>
+  
+
+
+  
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+    <ion-fab-button (click) = 'alertaDesactivar()' style = 'margin-bottom: 7.5px;' color = 'danger'>
+      <ion-icon name="log-out-outline" size="large"></ion-icon>
+    </ion-fab-button>
+
+
+    <ion-fab-button routerLink="/editar-perfil-cita">
+     <ion-icon name="create-outline" size="large"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+</ion-content>
+<style>
+  .circle-pic {     
+    width: 55%;
+    height: 35%;
+    margin: auto;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-width: 50px; */
+
+  }
+</style>

@@ -1,0 +1,54 @@
+<app-header nombre="cursos"></app-header>
+
+<ion-content *ngIf='user.Estado == "A"'>
+  <ion-searchbar
+    color="light" 
+    placeholder = "Buscar curso..."
+    animated
+
+    (ionChange)="buscar($event)">
+    </ion-searchbar>
+
+  <ion-card *ngFor="let curso of cursos | filtroCurso: textoBuscar" scrollable class = "item">
+    <ion-item [routerLink]="['/curso-detalle',curso.id, curso.Nombre]" >
+
+      <ion-thumbnail slot="start" slot="start">
+        <img src="{{curso.Imagen}}" alet="foto">
+      </ion-thumbnail>
+      <ion-card-title>{{curso.Nombre}}</ion-card-title>
+    </ion-item>
+  
+
+  </ion-card>
+
+  <ion-fab *ngIf="rol=='Ayudante'" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="crearCurso()">
+     <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  
+
+</ion-content>
+
+<ion-content *ngIf='user.Estado == "P"'>
+
+  <div align='center' style="margin-bottom: 10px;margin-top: 75px;width: 85%;margin-left: 7.5%;">
+   
+      <ion-label style="font-size:19.5px;text-align: center;margin:auto">Estamos verificando su cuenta!</ion-label>
+  
+  
+  </div>
+  
+  <ion-img style="margin:auto;width: 225px;height: 350px;margin-top:5px;" src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2Finspector.jpg?alt=media&token=df26d9dd-ffad-4f7a-bcef-b33c8c0c6584" alt="hola"></ion-img>
+  
+  <div align="center" style="margin-top:15px">
+    <ion-button style="margin:auto;" (click)="logOutUser()">Cerrar Sesión</ion-button>
+  </div>
+  
+  
+  
+</ion-content>
+
+
+

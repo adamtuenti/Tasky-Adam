@@ -1,0 +1,57 @@
+<app-header nombre="perfil"></app-header>
+
+<ion-content>
+   <ion-searchbar
+    color="light" 
+    placeholder = "Buscar curso..."
+    animated
+
+    (ionChange)="buscar($event)">
+    </ion-searchbar>
+
+  <ng-container *ngFor="let ayudante of ayudantias">
+    <ng-container *ngIf="ayudante.Usuario == id">
+      <ng-container *ngFor="let curso of cursos | filtroCurso: textoBuscar">
+        <ion-card *ngIf="ayudante.Materia == curso.id" scrollable class = "item">
+          <ion-item >
+      
+            <ion-thumbnail slot="start" slot="start" [routerLink]="['/mis-comentarios', curso.id]">
+              <img src="{{curso.Imagen}}" alet="foto">
+            </ion-thumbnail>
+            <ion-card-title style="font-size: 17.2px;" [routerLink]="['/mis-comentarios', curso.id]">{{curso.Nombre}}</ion-card-title>
+
+            
+            <ion-button fill="outline" slot='end'><ion-icon name="eye-outline" ></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{ayudante.Visitas}}</label></ion-button>
+            <ion-icon name="trash-outline" slot='end' color="danger" (click)="alert(ayudante.id)"></ion-icon>
+
+          </ion-item>
+        
+      
+        </ion-card>
+
+      </ng-container>
+
+    </ng-container>
+  </ng-container>
+
+   <ng-container *ngIf="getDatos()">
+
+    <div style="margin-top: 75px;" align='center'> 
+      <ion-text color="medium">
+
+        <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FmisAyudantias.png?alt=media&token=f0b8c2fd-9eae-4188-9000-fb9ed77978f1" style="width: 55%; height:62%;" alet="foto">
+        
+        <p style="font-size: 21px;">No hay ayudantías registradas.</p>
+      </ion-text>  
+    </div>
+  </ng-container>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click) = 'validarCurso()'>
+     <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+
+</ion-fab>
+  
+
+</ion-content>

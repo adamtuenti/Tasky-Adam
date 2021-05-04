@@ -1,0 +1,125 @@
+<app-header nombre="citas"></app-header>
+
+<ion-content>
+    <ion-segment color="tertiary" value="buscar">
+  
+      <ion-segment-button value="buscar" [routerLink]="['/citas']" routerDirection="root">
+        <ion-icon name="search-outline" size="large"></ion-icon> <ion-label>Buscar</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="ayudantes" [routerLink]="['/mis-chat']" routerDirection="root">
+        <ion-icon name="chatbubbles-outline" size="large"></ion-icon> <ion-label>Chats</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="perfil" [routerLink]="['/mi-perfil-cita']" routerDirection="root">
+        <ion-icon name="person-outline" size="large"></ion-icon> <ion-label style="font-size: 12px;">Perfil</ion-label>
+      </ion-segment-button>
+  
+    </ion-segment>
+
+    <!-- <div align='center' style = 'padding: 7.5px;'>
+      <ion-label style="font-size: 25.5px;font-weight: bold;font-style: italic;">{{cita.Nombre}} {{cita.Apellido}}</ion-label>
+    </div> -->
+    
+
+ 
+      <ion-slides pager="true" [options] = 'slideOpts'>
+
+        
+        
+        <ion-slide style="margin: auto;height: 400px;width: 85%;">
+
+          <div class = 'swiper-zoom-container'>
+            <img src="{{cita.FotoPerfil}}" style="height: 350px;width: 100%;"/>
+
+          </div>
+
+          
+        </ion-slide>
+        <ion-slide *ngIf='cita.Foto2!=""' style="margin: auto;height: 400px;width: 85%;">
+
+          <div class = 'swiper-zoom-container'>
+            <img src="{{cita.Foto2}}" style="height: 350px;width: 100%;"/>
+          </div>
+          
+        </ion-slide>
+        
+      </ion-slides>
+  
+  
+
+
+
+    <ion-card>
+
+      <ion-card-title style = 'padding: 7.5px;margin-top: 5px;'>
+
+        <ion-label style="font-size: 25px;font-weight: bold;margin-right: 9.2px;">{{cita.Nombre}} {{cita.Apellido}}</ion-label> <ion-label style = 'font-size: 19.1px;'>{{edad}}</ion-label>
+
+      </ion-card-title>
+
+      <ion-card-content>
+        <ion-label style="font-size: 19.1px;">{{cita.Descripcion}}</ion-label>
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <!-- <ion-card style='padding: 7.5px;'>
+      <ion-label style="font-size: 19.1px;font-weight: bold;align-items: center;margin-right: 7.5px;">Edad:</ion-label>
+      <ion-label style="font-size: 19.1px;align-items: center;">{{edad}}</ion-label>
+    </ion-card> -->
+
+    
+
+
+    <!-- <ion-card style='padding: 7.5px;'>
+      <ion-label style="font-size: 19.1px;font-weight: bold;align-items: center;margin-right: 7.5px;">Buscas: </ion-label>
+      <ion-icon *ngIf = 'cita.Busca == "M"' name="man-outline" size="large" color='success'></ion-icon>
+      <ion-icon *ngIf = 'cita.Busca == "F"' name="woman-outline" size="large" color='success'></ion-icon>
+    </ion-card> -->
+
+    <!-- <ion-card style='padding: 7.5px;'>
+      <ion-label style="font-size: 19.1px;font-weight: bold;align-items: center;margin-right: 2.5px;">Sexo: </ion-label>
+      <ion-icon *ngIf = 'cita.Sexo == "M"' name="man-outline" size="large" color='success'></ion-icon>
+      <ion-icon *ngIf = 'cita.Sexo == "F"' name="woman-outline" size="large" color='success'></ion-icon>
+    </ion-card> -->
+
+    
+  
+
+
+
+
+
+
+    <!-- <ion-item>
+      <ion-icon routerLink="/perfil-update" name="create-outline" size="large" style="margin-right: 8px;" layout="icon-end" slot="end"></ion-icon>
+
+    </ion-item> -->
+  
+
+
+  
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" color = 'success'>
+    <ion-fab-button (click) = "validarChat()" color = 'success'>
+     <ion-icon name="chatbubble-outline" size="large"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+</ion-content>
+<style>
+  .circle-pic {     
+    width: 55%;
+    height: 35%;
+    margin: auto;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-width: 50px; */
+
+  }
+</style>

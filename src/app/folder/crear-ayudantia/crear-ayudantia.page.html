@@ -1,0 +1,37 @@
+<app-header nombre="perfil"></app-header>
+
+
+<ion-content>
+  <ion-searchbar
+  color="light" 
+  placeholder = "Buscar curso..."
+  animated
+
+  (ionChange)="buscar($event)">
+  </ion-searchbar>
+
+
+
+  <ng-container *ngFor="let curso of nuevosCursos">
+
+    <ng-container *ngFor="let materia of cursos | filtroCurso: textoBuscar">
+
+
+
+      <ion-item *ngIf="curso==materia.id" style="padding: 2.5px;"  >
+        <!-- [routerLink]="['/curso-detalle',curso.id, curso.Nombre]" -->
+        <ion-thumbnail slot="start" slot="start">
+          <img src="{{materia.Imagen}}" alet="foto">
+        </ion-thumbnail>
+        <ion-card-title ><label style="font-size: 17.2px; font-weight: bold; ">{{materia.Nombre}}</label></ion-card-title>
+
+        <ion-icon slot="end" name="person-add-outline" (click)="crearAyudantia(materia.id)"></ion-icon>
+      </ion-item>
+  
+
+    </ng-container>
+  </ng-container>
+
+   
+
+</ion-content>

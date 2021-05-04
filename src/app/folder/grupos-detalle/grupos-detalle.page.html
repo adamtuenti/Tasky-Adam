@@ -1,0 +1,69 @@
+<app-header nombre="cursos"></app-header>
+
+<ion-content>
+
+  <!-- <ion-segment color="tertiary" value="anuncio">
+
+    <ion-segment-button value="anuncios" layout="icon-start" [routerLink]="['/curso-detalle',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="megaphone-outline" size="large"></ion-icon> <ion-label>Anuncios</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="ayudantes" layout="icon-start"  [routerLink]="['/curso-ayudantes',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-outline" size="large"></ion-icon> <ion-label>Ayudantes</ion-label>
+    </ion-segment-button>
+
+   
+  </ion-segment> -->
+
+
+  <ion-card>
+
+    <div align='center' style="margin-top: 7.5px;margin-bottom: 7.5px;">
+     
+      
+        <ion-label style="font-size: 23.5px;font-weight: bold;">{{grupo.Nombre}}</ion-label>
+     
+
+    </div>
+
+    
+
+    <ion-item>
+
+      <ion-img id="blah" src="{{grupo.Imagen}}" alt="your image" style="margin-top:2.5px;margin-bottom: 3.5px;height: 250px;width: 250px;margin:auto;"></ion-img>
+
+    </ion-item>
+    <!-- <ion-img src="{{usuario.FotoPerfil}}" style="margin-top:7.5px;margin-bottom: 7.5px;"></ion-img> -->
+    <!-- <ion-card-header>
+      <ion-card-title>Correo: {{usuario.Correo}}</ion-card-title>
+    </ion-card-header> -->
+
+    
+    
+    <ion-item>
+      
+      <ion-label style="font-size: 15px;">{{grupo.Descripcion}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <a href= '{{grupo.Link}}'><ion-icon name="person-add-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>Link grupo</ion-label>
+    </ion-item>
+    
+
+   
+
+    <!-- <ion-item>
+
+      
+      <ion-icon name="mail-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon>
+     
+      <a href="mailto:adanavarrete15@gmail.com">Enviar</a>
+      <ion-label>Correo: {{usuario.Correo}}</ion-label>
+    </ion-item> -->
+
+    
+  </ion-card>
+
+ 
+  
+</ion-content>

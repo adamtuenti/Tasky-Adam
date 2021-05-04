@@ -1,0 +1,143 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content padding>
+  <ion-card>
+    <!-- <ion-list>
+      <ion-img src="../../assets/log.png"></ion-img>
+    </ion-list> -->
+    <div align="center" style="margin-top:15px">
+      <label style="font-size: 31px;">Registro</label>
+    </div>
+
+    <form #form="ngForm" (ngSubmit)="RegistrarUser(form)">
+      <ion-list>   
+          
+        <ion-item>
+          <ion-label><ion-icon name="person-outline"></ion-icon><ion-text color="danger"></ion-text></ion-label>
+          <ion-input required placeholder="Nombre" name="nombre" type='text' ngModel required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><ion-icon name="person-outline"></ion-icon><ion-text color="danger"></ion-text></ion-label>
+          <ion-input required placeholder="Apellido" name="apellido" type='text' ngModel required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label><ion-icon name="mail-outline"></ion-icon><ion-text color="danger"></ion-text></ion-label>
+          <ion-input required placeholder="Correo (de su preferencia)" name="email" type='email' ngModel required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><ion-icon name="key-outline"></ion-icon> <ion-text color="danger"></ion-text></ion-label>
+          <ion-input placeholder="Contraseña" name="password" type='password' ngModel required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><ion-icon name="call-outline"></ion-icon> <ion-text color="danger"></ion-text></ion-label>
+          <ion-input placeholder="WhatsApp" name="telefono" type='text' ngModel required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label><ion-icon name="card-outline"></ion-icon> <ion-text color="danger"></ion-text></ion-label>
+          <ion-input placeholder="Matricula" name="matricula" type='text' maxlength = '9' ngModel required></ion-input>
+        </ion-item>
+
+
+
+        <!-- <ion-item>
+
+          pattern="\d" 
+            <ion-label>Rol</ion-label>
+            <ion-select placeholder="" name="rol" ngModel required>   
+              <ion-select-option  value="profesor">Profesor </ion-select-option>
+              <ion-select-option  value="estudiante">Estudiante </ion-select-option> 
+            </ion-select>
+          </ion-item> -->
+        
+        
+        
+        <!-- <ion-card>
+          <ion-item>
+            <ion-label><ion-icon name="image-outline"></ion-icon> Foto de perfil<ion-text color=""></ion-text></ion-label>
+          
+            <ion-input type='file' accept="image/*" id="myFileInput" name="foto" (change)="readURL($event);" class="fileInput" ngModel required></ion-input>
+          </ion-item>
+        </ion-card> -->
+
+          <!-- <ion-item>
+            <ion-label><ion-icon name="image-outline"></ion-icon> Seleccione su foto de perfil <ion-text color=""></ion-text></ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type='file' accept="image/*" id="perfilFoto" name="foto" (change)="readURL($event);" class="fileInput" ngModel required></ion-input>
+          </ion-item> -->
+          
+          
+        
+
+        <ion-card>
+          <ion-item>
+            <ion-label><ion-icon name="image-outline"></ion-icon> Carnet o académico <ion-text color=""></ion-text></ion-label>
+            <ion-input type='file' accept="image/*" id="myFileInput" name="foto" (change)="readURL1($event);" class="fileInput" ngModel required></ion-input>
+          </ion-item>
+          <ion-label style="margin:auto">Con esto validaremos que seas un estudiante de Espol.</ion-label>
+
+
+        </ion-card>
+        
+
+        <!-- <ion-item *ngIf="imageSrc != null">
+        <ion-grid>
+          <ion-row> 
+            <ion-col> </ion-col>
+            <ion-col>
+            <ion-label class="perfil"><ion-text>Foto de perfil</ion-text></ion-label>
+              <br>
+              <ion-thumbnail>
+                  <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+                </ion-thumbnail>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>  
+        </ion-item> -->
+      </ion-list> 
+
+      <div class="ion-padding" align="center">
+        <ion-button type="submit"  style="width: 150px;" [disabled]="form.invalid" expand="block">
+          Registrar
+        </ion-button>
+        <p style="font-size: 15px;" routerLink="/login" routerDirection="root">Ya tengo cuenta</p>
+      </div>
+    </form>
+  </ion-card>
+</ion-content>
+
+<style>
+#myFileInput{
+  position: absolute;
+  opacity: 0;
+}
+  .perfil {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+  }
+  .item ion-thumbnail {
+    min-width: 10rem;    
+    min-height: 10rem;
+    /* img {
+      max-width: 10rem;    
+      min-width: 10rem;
+    }   */
+  }
+  ion-img {     
+      width: 60%;
+      margin: auto;
+      display: block;
+  }
+</style>

@@ -1,0 +1,54 @@
+<app-header nombre="cursos"></app-header>
+<ion-content>
+
+<form #form="ngForm" (ngSubmit)="crearPublicacion(form)">
+      <ion-list>  
+        
+        <ion-card style="margin-top:15px">
+          <ion-item>
+            <ion-label>Título </ion-label>
+          </ion-item>
+          <ion-item>
+          
+            <ion-input required placeholder="Ingrese el título" name="titulo" type='text' ngModel required></ion-input>
+          </ion-item>
+
+        </ion-card>
+      
+      <ion-card style="margin-top:15px">
+        <ion-item>
+          <ion-label>Descripción </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-textarea required placeholder="Ingrese la descripción" name="descripcion" type='text' ngModel required></ion-textarea>
+        </ion-item>
+
+
+
+      </ion-card>
+        
+      
+    <ion-card style="margin-top:15px">
+      <ion-item>
+        <ion-label><ion-icon name="image-outline"></ion-icon> <ion-text color="" style="margin-left: 7.5px;">Seleccionar foto</ion-text></ion-label>
+      
+        <ion-input type='file' accept="image/*" id="myFileInput" name="foto" (change)="readURL($event);" class="fileInput" ngModel required></ion-input>
+      </ion-item>
+
+    </ion-card>
+
+      
+      </ion-list>
+
+        <ion-button  style="width: 150px;margin:auto;" type="submit"  [disabled]="form.invalid" expand="block">
+          Guardar
+        </ion-button>
+    </form>
+
+</ion-content>
+<style>
+#myFileInput{
+  position: absolute;
+  opacity: 0;
+}
+</style>

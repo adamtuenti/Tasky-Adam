@@ -1,0 +1,60 @@
+<app-header nombre="publicaciones"></app-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <label style="margin: auto;display: block;font-size: 27px;font-weight: bold;color:black; align-items: center;text-align: center;">{{detalle.Titulo}}</label>
+    </ion-card-header>
+    <ion-card-content style="margin: auto;display: block;font-size: 19px;color:black; align-items: center;text-align: center;">
+      {{detalle.Descripcion}}
+     </ion-card-content>
+     
+     
+     
+     <ion-img src="{{detalle.Foto}}" style="height: 275px;width: 250px;margin: auto;display: block;margin-top: 7.5px;"></ion-img>
+
+     <div align="center" style="margin-bottom: 15.5px;">
+      <ion-button  expand="full"  expand="full" href="{{detalle.Foto}}" style="width: 50px;height: 50px;" color="light"><ion-icon name="expand-outline" size="large" ></ion-icon> </ion-button>
+     </div>
+   
+
+        
+
+    
+
+
+    
+    <ng-container >
+
+      <label style="margin: auto;display: block;font-size: 17.5px;font-weight: bold;color:black; align-items: center;text-align: center;margin-top: 7.5px;">Contacto:</label>
+
+    
+      <ion-item>
+        <ion-icon name="person-outline" size="large" style="margin-right: 8px;" color="success"></ion-icon>
+        <ion-label style="font-size: 17px;">{{detalle.Empresa}}</ion-label>
+      </ion-item>
+
+    
+
+    <ion-item>
+      <a href= 'https://api.whatsapp.com/send?phone={{detalle.Telefono}}'><ion-icon name="logo-whatsapp" size="large" color="success" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>{{detalle.Telefono}}</ion-label>
+    </ion-item>
+
+    
+
+   
+  </ng-container>
+
+  
+
+
+
+    
+
+
+    
+
+  </ion-card>
+
+</ion-content>

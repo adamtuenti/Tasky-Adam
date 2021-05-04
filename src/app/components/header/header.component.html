@@ -1,0 +1,39 @@
+<ion-header>
+
+
+
+
+  <ion-toolbar>
+
+    <ion-segment color="tertiary"  value="{{text}}" >
+      <ion-segment-button value="publicaciones"  [routerLink]="['/publicaciones']" routerDirection="root">
+        <ion-icon name="newspaper-outline" size="large"></ion-icon> 
+      </ion-segment-button>
+      
+      <ion-segment-button value="cursos" [routerLink]="['/cursos']" routerDirection="root">
+        <ion-icon name="library-outline" size="large"></ion-icon>
+      </ion-segment-button>
+
+      <ion-segment-button value="adopcion" [routerLink]="['/adopcion']" routerDirection="root">
+        <ion-icon name="paw-outline" size="large"></ion-icon>
+      </ion-segment-button>
+    
+    
+      <ion-segment-button value="perfil" [routerLink]="['/perfil']" routerDirection="root">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+      </ion-segment-button>
+
+
+      <!-- <ion-segment-button value="citas" *ngIf = 'citas=="Si"' [routerLink]="['/citas']" routerDirection="root">
+        <ion-icon name="chatbubbles-outline" size="large"></ion-icon>
+      </ion-segment-button> -->
+
+      <!-- <ion-segment-button value="pendiente" *ngIf="estado == 'P'" [routerLink]="['/pendiente']" routerDirection="root">
+        <ion-icon name="hand-left-outline" size="large"></ion-icon>
+      </ion-segment-button>  -->
+
+    </ion-segment>
+
+  </ion-toolbar>
+
+</ion-header>

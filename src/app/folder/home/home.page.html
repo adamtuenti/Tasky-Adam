@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button>
+      </ion-menu-button>
+      <ion-title>Home</ion-title>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment color="tertiary" value="publicaciones">
+
+    <ion-segment-button value="publicaciones" [routerLink]="['/publicaciones']" routerDirection="root">
+        <ion-icon name="newspaper-outline" size="large"></ion-icon> 
+      </ion-segment-button>
+      
+      <ion-segment-button value="cursos" [routerLink]="['/cursos']" routerDirection="root">
+        <ion-icon name="library-outline" size="large"></ion-icon>
+      </ion-segment-button>
+
+      <ion-segment-button value="adopcion" [routerLink]="['/adopcion']" routerDirection="root">
+        <ion-icon name="paw-outline" size="large"></ion-icon>
+      </ion-segment-button>
+    
+    
+      <ion-segment-button value="perfil" [routerLink]="['/perfil']" routerDirection="root">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
+  <ion-card *ngFor="let publicacion of publicaciones">
+    <ion-card-header>
+      <ion-card-title>{{publicacion.Titulo}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{publicacion.Descripcion}}
+    </ion-card-content>
+    <!--<ion-item [routerLink]="['/curso-detalle',curso.id]" > 
+    </ion-item>-->  
+  </ion-card>
+
+
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/crear-publicacion">
+     <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

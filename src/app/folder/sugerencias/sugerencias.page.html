@@ -1,0 +1,45 @@
+<app-header nombre="perfil"></app-header>
+
+<ion-content fullscreen>
+<form #form="ngForm" (ngSubmit)="enviarSugerencia(form)">
+    <ion-list>
+      
+      <ion-card style="margin-top:15px">
+        <ion-item>
+          <ion-label>Asunto </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input required placeholder="Ingrese el asunto:" name="titulo" type='text' ngModel required></ion-input>
+        </ion-item>
+      </ion-card>
+         
+      <!-- <ion-item>
+        <ion-label> </ion-label>
+        <ion-input required placeholder="Título" name="titulo" type='text' ngModel required></ion-input>
+      </ion-item>
+      <ion-item> -->
+
+        <ion-card style="margin-top:15px">
+          <ion-item>
+            <ion-label>Descripción </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-textarea required placeholder="Ingrese la descripción:" name="descripcion" type='text' ngModel required></ion-textarea>
+          </ion-item>
+        </ion-card>
+
+
+        <!-- <ion-label> </ion-label>
+        <ion-textarea required placeholder="Descripción" name="descripcion" type='text' ngModel required></ion-textarea>
+      </ion-item> -->
+    
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button type="submit"  [disabled]="form.invalid" expand="block" style="width: 125px;margin:auto;">
+        Enviar
+      </ion-button>
+    </div>
+  </form>
+
+</ion-content>

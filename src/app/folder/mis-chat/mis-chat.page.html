@@ -1,0 +1,151 @@
+<app-header nombre="citas"></app-header>
+
+<ion-content>
+    <ion-segment color="tertiary" value="buscar">
+  
+      <ion-segment-button value="buscar" [routerLink]="['/citas']" routerDirection="root">
+        <ion-icon name="search-outline" size="large"></ion-icon> <ion-label>Buscar</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="ayudantes" [routerLink]="['/mis-chat']" routerDirection="root">
+        <ion-icon name="chatbubbles-outline" size="large"></ion-icon> <ion-label>Chats</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="perfil" [routerLink]="['/mi-perfil-cita']" routerDirection="root">
+        <ion-icon name="settings-outline" size="large"></ion-icon> <ion-label style="font-size: 12px;">Perfil</ion-label>
+      </ion-segment-button>
+  
+    </ion-segment>
+
+
+    <!-- <ion-item-divider> -->
+
+<div style = 'margin-top: 10.5px;'>
+  <ion-label style = 'font-size: 21.1px;font-weight: bold;color: blue;margin-left: 7.5px; margin-bottom: 12.5px;'>Coincidencias nuevas</ion-label>
+
+</div>
+
+
+  <ion-grid fixed style = 'width: 100%;'>
+
+ 
+     <ion-row >
+       <ion-col size = '12'>
+
+        
+
+         <ion-segment scrollable >
+
+          <ion-segment-button>
+              <ion-avatar style='height: 70px;width: 70px;'>
+              <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FmoradoVacio.png?alt=media&token=91dc2c12-7d29-40ad-86f3-bd0947c1a681" alet="foto">
+            </ion-avatar>
+          </ion-segment-button>
+
+          <ion-segment *ngFor='let chat of yalaChat' style = 'padding: 2.5px;'>
+            <ion-avatar style= 'margin-right: 7.5px' *ngIf = 'chat.mensaje < 0' [routerLink]="['/chat',chat.id, chat.user.id]">
+              <img src="{{chat.user.FotoPerfil}}" alet="foto">
+  
+            </ion-avatar>
+
+          </ion-segment>
+
+          
+
+           <!-- <ion-segment-button >
+              
+
+           </ion-segment-button> -->
+           
+
+         </ion-segment>
+
+
+
+
+       </ion-col>
+      </ion-row>
+ 
+    </ion-grid>
+       
+<!-- 
+        <ion-col *ngFor='let chat of yalaChat'>
+  
+  
+  
+  
+            <ion-avatar style='height: 55px;width: 55px;' >   -->
+              <!-- *ngIf = 'chat.mensaje < 0' -->
+              <!-- <img src="{{chat.user.FotoPerfil}}" alet="foto">
+            </ion-avatar>
+          </ion-col> -->
+   
+
+      
+    
+        
+
+
+    
+      
+    <!-- </ion-item-divider> -->
+  
+<div style = 'margin-top: 15px;'>
+  <ion-label style = 'font-size: 21.1px;font-weight: bold;color: blue;margin-left: 7.5px'>Tus chats</ion-label>
+
+</div>
+
+
+<ng-container *ngIf = 'sinChat == false'>
+
+  
+
+
+  <ion-list *ngFor='let chat of yalaChat'>
+
+    <ion-item [routerLink]="['/chat',chat.id, chat.user.id]" *ngIf = 'chat.mensaje > -1'>
+
+      <ion-avatar slot="start" slot="start" style='height: 68px;width: 68px;'>
+        <img src="{{chat.user.FotoPerfil}}" alet="foto">
+      </ion-avatar>
+  
+      <ion-label style = 'color:black;font-size: 17.1px;font-size:bold'>{{chat.user.Nombre}} {{chat.user.Apellido}}</ion-label>
+    
+    </ion-item>
+
+
+
+
+</ion-list>
+
+
+</ng-container>
+
+<ng-container *ngIf = 'sinChat == true'>
+
+  <div style="margin-top: 38px;" align='center'> 
+    <ion-text color="medium">
+
+      <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FmoradoVacio.png?alt=media&token=91dc2c12-7d29-40ad-86f3-bd0947c1a681" style="width: 225px; height:259px;" alet="foto">
+      
+      <p style="font-size: 21.1px;">Por ahora no tienes chats.</p>
+    </ion-text>  
+  </div>
+
+</ng-container>
+
+  
+
+</ion-content>
+
+<!-- 
+  <ion-item [routerLink]="['/chat',user.id, user.name,user.username]">
+
+    <ion-avatar slot="start" slot="start" style='height: 62px;width: 62px;'>
+      <img src="{{user.dp}}" alet="foto">
+    </ion-avatar>
+
+    <ion-label>{{user.name}} {{user.uid}}</ion-label>
+    
+
+  </ion-item> -->

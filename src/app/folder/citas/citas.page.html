@@ -1,0 +1,177 @@
+<app-header nombre="perfil"></app-header>
+
+<ion-content>
+    <ion-segment color="tertiary" value="buscar">
+  
+      <ion-segment-button value="buscar" [routerLink]="['/citas']" routerDirection="root">
+        <ion-icon name="search-outline" size="large"></ion-icon> <ion-label>Buscar</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="ayudantes" [routerLink]="['/mis-chat']" routerDirection="root">
+        <ion-icon name="chatbubbles-outline" size="large"></ion-icon> <ion-label>Chats</ion-label>
+      </ion-segment-button>
+  
+      <ion-segment-button value="perfil" [routerLink]="['/mi-perfil-cita']" routerDirection="root">
+        <ion-icon name="settings-outline" size="large"></ion-icon> <ion-label style="font-size: 12px;">Perfil</ion-label>
+      </ion-segment-button>
+  
+    </ion-segment>
+
+    
+<!-- 
+    <ion-card *ngFor = 'let p of people' [style.position] = "'absolute'" style = 'margin: auto'>
+
+      <img src="{{p.img}}" style="height: 450px;width: 450px;margin-bottom: 8.5px;" />
+      <ion-card-header>
+        <ion-card-title>{{p.name}}</ion-card-title>
+        <ion-card-subtitle>Edad: 15</ion-card-subtitle>
+      </ion-card-header>
+
+    </ion-card> -->
+    <div align = 'center' *ngIf = 'vacio == false'>
+
+    
+
+
+      <ion-card *ngFor="let cita of usuariosGustos" [style.position] = "'absolute'">
+
+        <ng-container>
+
+          <img src="{{cita.FotoPerfil}}" style="height: 450px;width: 450px;margin-bottom: 3.5px;"/>
+
+          <ion-fab vertical="start" horizontal="end">
+            <ion-fab-button [routerLink]="['/perfil-cita',cita.id]">
+            <ion-icon name="information" size = 'large'></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+
+
+        </ng-container>
+
+        
+
+
+          
+          
+        <ion-card-header>
+          <ion-card-title>
+            <ion-label style = 'font-size: 25px;font-weight: bold;margin-bottom: 7.5px;'>{{cita.Nombre}} {{cita.Apellido}}</ion-label>
+          </ion-card-title>
+            
+
+
+
+          <ion-card-subtitle style='margin-top:7.5px'>
+            <div align = 'center'>
+
+              <ion-button fill="outline" color = 'danger' (click) = 'solicitarAmistad(false, cita)'>
+                <ion-icon name="skull-outline" size="large"></ion-icon>
+              </ion-button>
+
+              
+              <ion-button fill="outline" color = 'success' style = 'margin-right: 7.5px;' (click) = 'solicitarAmistad(true, cita)'>
+                <ion-icon name="heart" color = 'success' size="large" ></ion-icon>
+              </ion-button>
+              
+            </div>
+
+          </ion-card-subtitle>
+        </ion-card-header>
+          
+          
+
+        
+      </ion-card>
+    </div>
+
+    <ng-container *ngIf = 'vacio'>
+      <div style="margin-top: 50px;" align='center'> 
+        <ion-text color="medium">
+  
+          <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FmoradoVacio.png?alt=media&token=91dc2c12-7d29-40ad-86f3-bd0947c1a681" style="width: 295px; height:325px;" alet="foto">
+          
+          <p style="font-size: 25px;">No hay personas para mostrar.</p>
+        </ion-text>  
+      </div>
+
+
+    </ng-container>
+
+
+    <!-- <ion-pane ng-controller="CardsCtrl">
+
+      <ion-header-bar>
+        Hola que tal
+      </ion-header-bar>
+      <swipe-cards>
+        <swipe-card on-card-swipe = "cardSwiped()" id = 'start-card'>
+          Arriba para like
+        </swipe-card>
+
+        <swipe-card ng-repeat = 'let cita of citas' on-destroy = 'cardDestroy($index)' on-card-swipe = "cardSwipe($index)">
+          <div ng-controller = "CardCtrl">
+            <div card = "title">
+              {{cita.Nombre}}
+
+            </div>
+            <div>
+              <ion-img src="{{cita.FotoPerfil}}" style="height: 450px;width: 100%;margin-bottom: 8.5px;" [routerLink]="['/perfil-cita',cita.id]"></ion-img>
+              
+            </div>
+            <div>
+              <ion-button fill="outline" color = 'success' style = 'margin-right: 7.5px;'>
+                <ion-icon name="heart" color = 'success' size="large" ></ion-icon>
+              </ion-button>
+              <ion-button fill="outline" color = 'danger'>
+                <ion-icon name="skull-outline" size="large"></ion-icon>
+  
+              </ion-button>
+
+            </div>
+
+          </div>
+        </swipe-card>
+
+
+
+      </swipe-cards>
+
+
+
+    </ion-pane> -->
+
+    
+
+
+    <!-- <ion-slides pager="true" [options]="slideOpts" style="height: 87%;">
+      <ion-slide style="width: 90%;" *ngFor="let cita of citas">
+        <div>
+
+          <ion-img src="{{cita.FotoPerfil}}" style="height: 450px;width: 100%;margin-bottom: 8.5px;" [routerLink]="['/perfil-cita',cita.id]"></ion-img>
+          <ion-label style = 'font-size: 21.5px;margin-bottom: 7.5px;'>{{cita.Nombre}} {{cita.Apellido}}</ion-label>
+          <div style = 'margin:auto;'>
+            <ion-button fill="outline" color = 'success' style = 'margin-right: 7.5px;' (click) = 'solicitarAmistad(true, cita.id, cita.Nombre, cita)'>
+              <ion-icon name="heart" color = 'success' size="large" ></ion-icon>
+            </ion-button>
+            <ion-button fill="outline" color = 'danger' (click) = 'solicitarAmistad(false, cita.id, cita.Nombre, cita)'>
+              <ion-icon name="skull-outline" size="large"></ion-icon>
+
+            </ion-button>
+            
+            
+          </div>
+        </div>
+        
+      </ion-slide>
+  
+    </ion-slides> -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <!-- <ion-fab-button routerLink="/sugerencias"> -->
+      <ion-fab-button (click) = 'after()'>
+       <ion-icon name="help-circle-outline" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+</ion-content>

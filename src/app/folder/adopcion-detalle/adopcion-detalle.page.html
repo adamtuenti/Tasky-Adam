@@ -1,0 +1,57 @@
+<app-header nombre="adopcion"></app-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <label style="margin: auto;display: block;font-size: 27px;font-weight: bold;color:black; align-items: center;text-align: center;">{{adopcion.Titulo}}</label>
+      
+    </ion-card-header>
+
+    <ion-card>
+    <ion-slides pager="true" [options]="slideOpts">
+          <ion-slide style="height: 325px;width: 85%;margin: auto">
+            <ion-button  expand="full" href="{{adopcion.Foto1}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{adopcion.Foto1}}" style="height: 275px;width: 100%;"></ion-img></ion-button>
+          </ion-slide>
+          <ion-slide *ngIf='adopcion.Foto2!=""' style="height: 325px;width: 85%;margin: auto">
+            <ion-button expand="full" href="{{adopcion.Foto2}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{adopcion.Foto2}}" style="height: 275px;width: 100%;"></ion-img></ion-button>
+          </ion-slide>
+          
+        </ion-slides>
+     
+    </ion-card>
+
+    
+
+    
+
+    <ion-card-content style="margin: auto;display: block;font-size: 19px;color:black; align-items: center;text-align: center;">
+      {{adopcion.Descripcion}}
+     </ion-card-content>
+     
+     
+
+     <div align="center" style="margin-bottom: 15.5px;">
+      <ion-button  expand="full"  expand="full" href="{{adopcion.Foto1}}" style="width: 50px;height: 50px;" color="light"><ion-icon name="expand-outline" size="large" ></ion-icon> </ion-button>
+      <ion-button fill="outline" slot='end'><ion-icon name="eye-outline"></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{adopcion.Visitas}}</label></ion-button>
+     </div>
+    <ng-container >
+
+      <label style="margin: auto;display: block;font-size: 17.5px;font-weight: bold;color:black; align-items: center;text-align: center;margin-top: 7.5px;">Contacto:</label>
+
+    
+      <ion-item>
+        <ion-icon name="person-outline" size="large" style="margin-right: 8px;" color="success"></ion-icon>
+        <ion-label style="font-size: 17px;">{{user.Nombre}} {{user.Apellido}}</ion-label>
+      </ion-item>
+    
+    <ion-item>
+      <a href= 'https://api.whatsapp.com/send?phone={{user.Telefono}}'><ion-icon name="logo-whatsapp" size="large" color="success" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>{{user.Telefono}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <a href="mailto:{{user.Correo}}"><ion-icon name="mail-outline" size="large" color="success" style="margin-right: 8px;"></ion-icon></a>
+      <ion-label>{{user.Correo}}</ion-label>
+    </ion-item>   
+  </ng-container>
+  </ion-card>

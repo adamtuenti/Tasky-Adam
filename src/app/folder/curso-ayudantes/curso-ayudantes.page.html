@@ -1,0 +1,92 @@
+<app-header nombre="cursos"></app-header>
+
+<ion-content>
+
+  <ion-segment color="tertiary" value="ayudantes">
+
+    <ion-segment-button value="anuncios" [routerLink]="['/curso-detalle',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="megaphone-outline" size="large"></ion-icon> <ion-label>Anuncios</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="ayudantes" [routerLink]="['/curso-ayudantes',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-outline" size="large"></ion-icon> <ion-label>Ayudantes</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="grupos" [routerLink]="['/grupos',id, nombreCurso]" routerDirection="root">
+      <ion-icon name="people-circle-outline" size="large"></ion-icon> <ion-label>Grupos</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+
+  <ion-searchbar
+    color="light" 
+    placeholder = "Buscar ayudante..."
+    animated
+
+    (ionChange)="buscar($event)">
+    </ion-searchbar>
+
+
+  <ng-container *ngIf="!condicionVacia">
+    <ng-container *ngFor="let ayudante of ayudantes">
+    <!-- <ng-container *ngIf="ayudante.Materia == id"> -->
+    <ng-container *ngFor="let usuario of usuarios | filtroUsuario: textoBuscar">
+      
+      <ion-item *ngIf="usuario.id == ayudante.Usuario" (click)='aumentarVisita(ayudante.id,ayudante)'>
+
+        <ion-avatar slot="start">
+          <img src="{{usuario.FotoPerfil}}">
+        </ion-avatar>
+
+        <!-- <ion-thumbnail slot="start" slot="start">
+          <img src="{{usuario.FotoPerfil}}" alet="foto">
+        </ion-thumbnail> -->
+        <ion-card-title>
+          {{usuario.Nombre}} {{usuario.Apellido}}
+        </ion-card-title>
+
+          <ion-list fill="outline" slot='end'>
+            <ion-item fill="outline">
+              <ion-icon name="thumbs-up-outline" ></ion-icon><ion-label style="font-size: 12;margin-left: 7.5px;" >{{ayudante.Like}}</ion-label>
+            </ion-item>
+            <ion-item fill="outline">
+              <ion-icon name="thumbs-down-outline" ></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{ayudante.Dislike}}</label>
+            </ion-item>
+            
+          </ion-list>
+          <!-- <div slot="end" style="align-items: center;justify-content: center;"><ion-icon name="eye-outline" ></ion-icon><label style="font-size: 12;margin-left: 7.5px;" >{{ayudante.Visitas}}</label></div> -->
+          
+        
+      </ion-item>
+    
+    </ng-container>
+    <!-- </ng-container> -->
+    </ng-container>
+
+  
+ 
+
+  </ng-container>
+
+  <ng-container *ngIf="condicionVacia">
+
+    <div style="margin-top: 50px;" align='center'> 
+      <ion-text color="medium">
+
+        <img src="https://firebasestorage.googleapis.com/v0/b/taskyapp01.appspot.com/o/iconos%2FgokuEnojado.jpg?alt=media&token=9e5b565f-28ae-4c97-8874-52863fa773dc" style="width: 350px; height:275px;" alet="foto">
+        
+        <p style="font-size: 25px;">No hay ayudantes registrados.</p>
+      </ion-text>  
+    </div>
+
+  </ng-container>
+
+  <ion-fab  *ngIf="rol=='Ayudante'" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button disabled="{{desabilitar}}" (click)="failedAlert()">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>
