@@ -52,7 +52,7 @@
                 </ion-slides>
 
                 <!-- <img *ngIf = 'mensaje.texto == false' src="{{mensaje.mensaje}}" style="height: 250px;width: 250px;"/> -->
-                <label style = 'font-size: 11.5px;margin-left: 7.5px;'>{{mensaje.fecha | date:'HH:mm'}}</label>
+                <label style = 'font-size: 10.5px;margin-left: 7.5px;color:#979797;font-weight: bold;'>{{mensaje.fecha | date:'HH:mm'}}</label>
             
             </ion-label>
                 <!-- <p>{{mensaje.nombre}}</p> -->
@@ -69,7 +69,7 @@
         <ion-col offset = '3' size = '9' autisize class = 'message my-message ion-text-right' *ngIf='mensaje.id == miId' color="transparent">
             <!-- <ion-label class='ion-text-right' style = 'background-color:#b4f1ce;padding: 7.5px;border-radius: 8.5px;'> -->
                 <!-- <p>{{mensaje.nombre}}</p> -->
-                <span *ngIf = 'mensaje.texto' style = 'font-size: 16.2px;color: black;'>{{mensaje.mensaje}}</span>
+                <label *ngIf = 'mensaje.texto' style = 'font-size: 16.2px;color: black;'>{{mensaje.mensaje}}</label>
 
                         <!-- <label *ngIf = 'mensaje.texto' style = 'font-size: 17.5px;color:black;'>{{mensaje.mensaje}}</label>-->
                         <ion-slides *ngIf = 'mensaje.texto == false' [options] = 'slideOpts' style = 'align-content: flex-end;'>

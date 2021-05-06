@@ -22,7 +22,7 @@ export class NoLoginGuard implements CanActivate {
       }
       else{
        
-        this.router.navigateByUrl('/perfil');
+        this.router.navigateByUrl('/carousel');
         return false;
       //redirigir al home profesor
       }

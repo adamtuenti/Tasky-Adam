@@ -30,7 +30,7 @@ export class PendienteGuard implements CanActivate {
         //redirigir al login
       }
       else{
-        this.router.navigateByUrl('/perfil');
+        this.router.navigateByUrl('/carousel');
         return false;
       }
 

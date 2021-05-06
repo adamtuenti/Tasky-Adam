@@ -15,7 +15,7 @@ import * as firebase from 'firebase';
 })
 export class CursoAyudantesPage implements OnInit {
 
-  usuarios:Usuarios[] = [];
+  usuarios = [];
   ayudantes = [];
   nombreCurso: string;
   id:string;
@@ -62,12 +62,22 @@ export class CursoAyudantesPage implements OnInit {
     
 
    // this.ayudanteService.getAyudantes().subscribe(res=> {this.ayudantes = res;this.shuffle(this.ayudantes);this.validarCurso()});
-    this.usuarioService.getUsuarios().subscribe(res => {this.usuarios = res;});
+    // this.usuarioService.getUsuarios().subscribe(res => {this.usuarios = res;});
     this.usuarioService.getUsuario( localStorage.getItem('userId')).subscribe(res => {this.rol=res.Rol;});
     
   }
 
   conseguirDatos(){
+
+
+    firebase.firestore().collection('Usuarios').where('Rol','==','Ayudante').onSnapshot(snap =>{
+      this.usuarios = []
+        snap.forEach(element => {
+          this.usuarios.push(element.data())
+        })
+    })
+
+
     firebase.firestore().collection('Ayudantes').where('Materia','==',this.id).onSnapshot(snap =>{
       this.ayudantes = []
         snap.forEach(element => {
@@ -77,7 +87,7 @@ export class CursoAyudantesPage implements OnInit {
           this.condicionVacia = true
         }
         this.shuffle(this.ayudantes);
-        this.ayudantes = this.ayudantes.slice(0,10)
+        // this.ayudantes = this.ayudantes.slice(0,10)
     })
 
     firebase.firestore().collection('Ayudantes').where('Usuario','==',localStorage.getItem('userId')).onSnapshot(snap =>{
