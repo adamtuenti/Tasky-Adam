@@ -15,7 +15,7 @@ import { FullScreenImage } from '@ionic-native/full-screen-image';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment'
 
 
 @Component({
@@ -27,6 +27,7 @@ export class ChatPage implements OnInit {
 
   userName: String = "";
   message: String = "";
+  urlBack = environment.URL_BACKEND
   // mensajes = [];
 
   name;
@@ -88,7 +89,7 @@ export class ChatPage implements OnInit {
           
       })
 
-      this.http.post("http://localhost:3000/chat_id", {id: paramMap.get('id')})
+      this.http.post(this.urlBack + "chat_id", {id: paramMap.get('id')})
       .subscribe(data => {
         console.log(data)
         this.mensajes = data
@@ -192,7 +193,7 @@ export class ChatPage implements OnInit {
   }
 
   getMensajes(){
-    this.http.post("http://localhost:3000/chat_id", {id: this.idChat})
+    this.http.post(this.urlBack+"/chat_id", {id: this.idChat})
           .subscribe(data => {
             console.log(data)
             this.mensajes = data
@@ -327,7 +328,7 @@ export class ChatPage implements OnInit {
 
     }
 
-    this.http.post("http://localhost:3000/enviar_mensaje", json, options)
+    this.http.post(this.urlBack + "/enviar_mensaje", json, options)
       .subscribe(data => {
         this.texto = ''
         setTimeout(() => {

@@ -11,18 +11,18 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./folder/login/login.module').then( m => m.LoginPageModule),
+    loadChildren: () => import('./folder/perfil/login/login.module').then( m => m.LoginPageModule),
     canActivate:[NoLoginGuard]
   },
  
   {
     path: 'perfil',
-    loadChildren: () => import('./folder/perfil/perfil.module').then( m => m.PerfilPageModule),
+    loadChildren: () => import('./folder/perfil/perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'registro',
-    loadChildren: () => import('./folder/registro/registro.module').then( m => m.RegistroPageModule),
+    loadChildren: () => import('./folder/perfil/registro/registro.module').then( m => m.RegistroPageModule),
     canActivate:[NoLoginGuard]
   },
   {
@@ -32,57 +32,57 @@ const routes: Routes = [
   },
   {
     path: 'cursos',
-    loadChildren: () => import('./folder/cursos/cursos.module').then( m => m.CursosPageModule),
+    loadChildren: () => import('./folder/ayudantias/cursos/cursos.module').then( m => m.CursosPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'curso-detalle/:id/:nombre',
-    loadChildren: () => import('./folder/curso-detalle/curso-detalle.module').then( m => m.CursoDetallePageModule),
+    loadChildren: () => import('./folder/ayudantias/curso-detalle/curso-detalle.module').then( m => m.CursoDetallePageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'publicaciones',
-    loadChildren: () => import('./folder/publicaciones/publicaciones.module').then( m => m.PublicacionesPageModule),
+    loadChildren: () => import('./folder/publicaciones/publicaciones/publicaciones.module').then( m => m.PublicacionesPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'usuario-detalle/:idMateria/:id',
-    loadChildren: () => import('./folder/usuario-detalle/usuario-detalle.module').then( m => m.UsuarioDetallePageModule),
+    loadChildren: () => import('./folder/perfil/usuario-detalle/usuario-detalle.module').then( m => m.UsuarioDetallePageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'publicaciones-materia',
-    loadChildren: () => import('./folder/publicaciones-materia/publicaciones-materia.module').then( m => m.PublicacionesMateriaPageModule),
+    loadChildren: () => import('./folder/ayudantias/publicaciones-materia/publicaciones-materia.module').then( m => m.PublicacionesMateriaPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'perfil-update',
-    loadChildren: () => import('./folder/perfil-update/perfil-update.module').then( m => m.PerfilUpdatePageModule),
+    loadChildren: () => import('./folder/perfil/perfil-update/perfil-update.module').then( m => m.PerfilUpdatePageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'crear-publicacion/:id',
-    loadChildren: () => import('./folder/crear-publicacion/crear-publicacion.module').then( m => m.CrearPublicacionPageModule),
+    loadChildren: () => import('./folder/publicaciones/crear-publicacion/crear-publicacion.module').then( m => m.CrearPublicacionPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'mis-publicaciones',
-    loadChildren: () => import('./folder/mis-publicaciones/mis-publicaciones.module').then( m => m.MisPublicacionesPageModule),
+    loadChildren: () => import('./folder/publicaciones/mis-publicaciones/mis-publicaciones.module').then( m => m.MisPublicacionesPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'curso-ayudantes/:id/:nombre',
-    loadChildren: () => import('./folder/curso-ayudantes/curso-ayudantes.module').then( m => m.CursoAyudantesPageModule),
+    loadChildren: () => import('./folder/ayudantias/curso-ayudantes/curso-ayudantes.module').then( m => m.CursoAyudantesPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'curso-detalle-anuncio/:id',
-    loadChildren: () => import('./folder/curso-detalle-anuncio/curso-detalle-anuncio.module').then( m => m.CursoDetalleAnuncioPageModule),
+    loadChildren: () => import('./folder/ayudantias/curso-detalle-anuncio/curso-detalle-anuncio.module').then( m => m.CursoDetalleAnuncioPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'pendiente',
-    loadChildren: () => import('./folder/pendiente/pendiente.module').then( m => m.PendientePageModule),
+    loadChildren: () => import('./folder/perfil/pendiente/pendiente.module').then( m => m.PendientePageModule),
     canActivate:[PendienteGuard]
   },
   // {
@@ -91,7 +91,7 @@ const routes: Routes = [
   // },
   {
     path: 'mis-ayudantias',
-    loadChildren: () => import('./folder/mis-ayudantias/mis-ayudantias.module').then( m => m.MisAyudantiasPageModule),
+    loadChildren: () => import('./folder/ayudantias/mis-ayudantias/mis-ayudantias.module').then( m => m.MisAyudantiasPageModule),
     canActivate:[AuthGuard]
   },
   // {
@@ -104,22 +104,22 @@ const routes: Routes = [
   // },
   {
     path: 'crear-ayudantia',
-    loadChildren: () => import('./folder/crear-ayudantia/crear-ayudantia.module').then( m => m.CrearAyudantiaPageModule),
+    loadChildren: () => import('./folder/ayudantias/crear-ayudantia/crear-ayudantia.module').then( m => m.CrearAyudantiaPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'mis-ayudantias-anuncios',
-    loadChildren: () => import('./folder/mis-ayudantias-anuncios/mis-ayudantias-anuncios.module').then( m => m.MisAyudantiasAnunciosPageModule),
+    loadChildren: () => import('./folder/ayudantias/mis-ayudantias-anuncios/mis-ayudantias-anuncios.module').then( m => m.MisAyudantiasAnunciosPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'solicitud-ayudantia',
-    loadChildren: () => import('./folder/solicitud-ayudantia/solicitud-ayudantia.module').then( m => m.SolicitudAyudantiaPageModule),
+    loadChildren: () => import('./folder/ayudantias/solicitud-ayudantia/solicitud-ayudantia.module').then( m => m.SolicitudAyudantiaPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'solicitud-materia',
-    loadChildren: () => import('./folder/solicitud-materia/solicitud-materia.module').then( m => m.SolicitudMateriaPageModule),
+    loadChildren: () => import('./folder/ayudantias/solicitud-materia/solicitud-materia.module').then( m => m.SolicitudMateriaPageModule),
     canActivate:[AuthGuard]
   },
   {
@@ -129,7 +129,7 @@ const routes: Routes = [
   },
   {
     path: 'editar-publicacion/:id/:redireccion',
-    loadChildren: () => import('./folder/editar-publicacion/editar-publicacion.module').then( m => m.EditarPublicacionPageModule),
+    loadChildren: () => import('./folder/publicaciones/editar-publicacion/editar-publicacion.module').then( m => m.EditarPublicacionPageModule),
     canActivate:[AuthGuard]
   },
   {
@@ -149,12 +149,12 @@ const routes: Routes = [
   },
   {
     path: 'crear-publicacion-todos',
-    loadChildren: () => import('./folder/crear-publicacion-todos/crear-publicacion-todos.module').then( m => m.CrearPublicacionTodosPageModule),
+    loadChildren: () => import('./folder/publicaciones/crear-publicacion-todos/crear-publicacion-todos.module').then( m => m.CrearPublicacionTodosPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'comentarios-usuario/:idMateria/:idAyudante',
-    loadChildren: () => import('./folder/comentarios-usuario/comentarios-usuario.module').then( m => m.ComentariosUsuarioPageModule),
+    loadChildren: () => import('./folder/ayudantias/comentarios-usuario/comentarios-usuario.module').then( m => m.ComentariosUsuarioPageModule),
     canActivate:[AuthGuard]
   },
   {
@@ -164,7 +164,7 @@ const routes: Routes = [
   },
   {
     path: 'detalle-publicidad/:id',
-    loadChildren: () => import('./folder/detalle-publicidad/detalle-publicidad.module').then( m => m.DetallePublicidadPageModule),
+    loadChildren: () => import('./folder/publicaciones/detalle-publicidad/detalle-publicidad.module').then( m => m.DetallePublicidadPageModule),
     canActivate:[AuthGuard]
   },
   {
@@ -174,54 +174,54 @@ const routes: Routes = [
   },
   {
     path: 'previo-citas',
-    loadChildren: () => import('./folder/previo-citas/previo-citas.module').then( m => m.PrevioCitasPageModule)
+    loadChildren: () => import('./folder/chat/previo-citas/previo-citas.module').then( m => m.PrevioCitasPageModule)
   },
   {
     path: 'citas',
-    loadChildren: () => import('./folder/citas/citas.module').then( m => m.CitasPageModule)
+    loadChildren: () => import('./folder/chat/citas/citas.module').then( m => m.CitasPageModule)
   },
   {
     path: 'mi-perfil-cita',
-    loadChildren: () => import('./folder/mi-perfil-cita/mi-perfil-cita.module').then( m => m.MiPerfilCitaPageModule)
+    loadChildren: () => import('./folder/chat/mi-perfil-cita/mi-perfil-cita.module').then( m => m.MiPerfilCitaPageModule)
   },
   {
     path: 'adopcion',
-    loadChildren: () => import('./folder/adopcion/adopcion.module').then( m => m.AdopcionPageModule),
+    loadChildren: () => import('./folder/adopcion/adopcion/adopcion.module').then( m => m.AdopcionPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'adopcion-crear',
-    loadChildren: () => import('./folder/adopcion-crear/adopcion-crear.module').then( m => m.AdopcionCrearPageModule),
+    loadChildren: () => import('./folder/adopcion/adopcion-crear/adopcion-crear.module').then( m => m.AdopcionCrearPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'adopcion-editar/:id',
-    loadChildren: () => import('./folder/adopcion-editar/adopcion-editar.module').then( m => m.AdopcionEditarPageModule),
+    loadChildren: () => import('./folder/adopcion/adopcion-editar/adopcion-editar.module').then( m => m.AdopcionEditarPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'adopcion-detalle/:id/:idUsuario',
-    loadChildren: () => import('./folder/adopcion-detalle/adopcion-detalle.module').then( m => m.AdopcionDetallePageModule),
+    loadChildren: () => import('./folder/adopcion/adopcion-detalle/adopcion-detalle.module').then( m => m.AdopcionDetallePageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'veterinarios',
-    loadChildren: () => import('./folder/veterinarios/veterinarios.module').then( m => m.VeterinariosPageModule),
+    loadChildren: () => import('./folder/adopcion/veterinarios/veterinarios.module').then( m => m.VeterinariosPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'detalle-veterinarios',
-    loadChildren: () => import('./folder/detalle-veterinarios/detalle-veterinarios.module').then( m => m.DetalleVeterinariosPageModule),
+    loadChildren: () => import('./folder/adopcion/detalle-veterinarios/detalle-veterinarios.module').then( m => m.DetalleVeterinariosPageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'veterinario-detalle/:id',
-    loadChildren: () => import('./folder/veterinario-detalle/veterinario-detalle.module').then( m => m.VeterinarioDetallePageModule),
+    loadChildren: () => import('./folder/adopcion/veterinario-detalle/veterinario-detalle.module').then( m => m.VeterinarioDetallePageModule),
     canActivate:[AuthGuard]
   },
   {
     path: 'comentario-veterinario/:id',
-    loadChildren: () => import('./folder/comentario-veterinario/comentario-veterinario.module').then( m => m.ComentarioVeterinarioPageModule),
+    loadChildren: () => import('./folder/adopcion/comentario-veterinario/comentario-veterinario.module').then( m => m.ComentarioVeterinarioPageModule),
     canActivate:[AuthGuard]
   },
   // {
@@ -230,19 +230,19 @@ const routes: Routes = [
   // },
   {
     path: 'chat/:id/:idCompanero',
-    loadChildren: () => import('./folder/chat/chat.module').then( m => m.ChatPageModule)
+    loadChildren: () => import('./folder/chat/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
     path: 'mis-chat',
-    loadChildren: () => import('./folder/mis-chat/mis-chat.module').then( m => m.MisChatPageModule)
+    loadChildren: () => import('./folder/chat/mis-chat/mis-chat.module').then( m => m.MisChatPageModule)
   },
   {
     path: 'perfil-cita/:idUser',
-    loadChildren: () => import('./folder/perfil-cita/perfil-cita.module').then( m => m.PerfilCitaPageModule)
+    loadChildren: () => import('./folder/chat/perfil-cita/perfil-cita.module').then( m => m.PerfilCitaPageModule)
   },
   {
     path: 'editar-perfil-cita',
-    loadChildren: () => import('./folder/editar-perfil-cita/editar-perfil-cita.module').then( m => m.EditarPerfilCitaPageModule)
+    loadChildren: () => import('./folder/chat/editar-perfil-cita/editar-perfil-cita.module').then( m => m.EditarPerfilCitaPageModule)
   },
   {
     path: 'carousel',

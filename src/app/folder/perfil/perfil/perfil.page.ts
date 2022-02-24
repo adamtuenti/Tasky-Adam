@@ -141,6 +141,7 @@ export class PerfilPage implements OnInit {
 
   activarChat(){
     this.user.Citas = true;
+    console.log('hola')
     this.usuarioService.updateUsuario(localStorage.getItem('userId'),this.user)
     this.router.navigateByUrl("/previo-citas")
     // if(this.user.Descripcion == ''){
