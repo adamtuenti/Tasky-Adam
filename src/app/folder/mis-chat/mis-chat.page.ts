@@ -9,6 +9,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ChatUser } from 'src/app/models/ChatUser';
 import { ChatService } from 'src/app/services/chat.service';
 
+
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-mis-chat',
   templateUrl: './mis-chat.page.html',
@@ -33,7 +38,9 @@ export class MisChatPage implements OnInit {
   public misChats: Usuarios[]= [];
 
 
-  yalaChat = []
+  yalaChat: any = []
+
+   yalaChat1: any = []
   puedoChat = []
   sinChat = false;
 
@@ -46,6 +53,7 @@ export class MisChatPage implements OnInit {
 
   constructor(public nav: NavController,
               private usuarioService: UsuarioService,
+              public http: HttpClient,
               private chatService: ChatService,) { 
     
 
@@ -100,7 +108,39 @@ export class MisChatPage implements OnInit {
 
     // })
 
-    firebase.firestore().collection('ChatUser').where('user2.id','==',localStorage.getItem('userId')).where('Visibilidad','==',true).onSnapshot(snap =>{
+    /* if(data[i].user1 == this.miId){
+            console.log('aqui: ', data[i].user2)
+            this.usuarioService.getUsuario(x.user2).subscribe(res => { this.yalaChat.push(res) });
+            
+          }
+          else{
+            this.usuarioService.getUsuario(x.user1).subscribe(res => {userTemp =res; console.log(res)});
+          }*/
+
+   /* this.http.post("http://localhost:3000/chats_user", {id: this.miId})
+      .subscribe(data => {
+        console.log(data)
+        JSON.parse(JSON.stringify(data)).map(data1 =>  {
+          if(data1.user1 == this.miId){
+            console.log('aqui: ', data1.user2)
+            this.usuarioService.getUsuario(data1.user2).subscribe(res => { this.yalaChat.push(res); console.log(res) });
+            
+          }
+          else{
+            this.usuarioService.getUsuario(data1.user1).subscribe(res => {this.yalaChat.push(res)});
+          }
+        });
+          
+       }, error => {
+        console.log(error);
+      });*/
+
+    
+    
+
+
+    
+   firebase.firestore().collection('ChatUser').where('user2.id','==',localStorage.getItem('userId')).where('Visibilidad','==',true).onSnapshot(snap =>{
 
           snap.forEach(element => {
             var json = { id: element.id, user: element.data().user1, mensaje: element.data().ultimoMensaje}
@@ -117,13 +157,13 @@ export class MisChatPage implements OnInit {
             this.sinChat = true
           }
           //this.obtenerChats();
-    })
+    })  
 
 
 
 
           //this.obtenerChats();
-    })
+     })
 
     
 
@@ -135,7 +175,7 @@ export class MisChatPage implements OnInit {
     sessionStorage.setItem('uid',uid)
     sessionStorage.setItem('name',name)
 
-    console.log(uid+name)
+    //console.log(uid+name)
 
     this.nav.navigateForward('/chat')
 

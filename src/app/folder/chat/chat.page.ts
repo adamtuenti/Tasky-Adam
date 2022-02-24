@@ -14,6 +14,10 @@ import { AlertController } from '@ionic/angular';
 import { FullScreenImage } from '@ionic-native/full-screen-image';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -36,7 +40,7 @@ export class ChatPage implements OnInit {
   chat;
   miId;
   idCompanero;
-  mensajes = []
+  mensajes: any = []
   companero: Usuarios = new Usuarios();
   bloqueo = false;
   miBloqueo = false;
@@ -58,6 +62,7 @@ export class ChatPage implements OnInit {
               private usuarioService: UsuarioService,
               private photoViewer: PhotoViewer,
               private alertCtrt: AlertController,
+              public http: HttpClient,
               // private fullScreenImage: typeof FullScreenImage,
               private chatService: ChatService,) { 
     
@@ -75,23 +80,32 @@ export class ChatPage implements OnInit {
       this.idCompanero = paramMap.get('idCompanero');
       this.miId = localStorage.getItem('userId')
       // this.chatService.getChat(this.idChat).subscribe(res => {this.chat =res;this.validarVistos()});
-      console.log(paramMap.get('idCompanero'))
       this.usuarioService.getUsuario(paramMap.get('idCompanero')).subscribe(res => {this.companero = res;console.log(this.companero)});
 
       firebase.firestore().collection('ChatUser').doc(paramMap.get('id')).onSnapshot(snap =>{
         this.chat = snap.data();
-        this.validarVistos()
+        //this.validarVistos()
           
       })
+
+      this.http.post("http://localhost:3000/chat_id", {id: paramMap.get('id')})
+      .subscribe(data => {
+        console.log(data)
+        this.mensajes = data
+       }, error => {
+        console.log(error);
+      });
       
 
-      firebase.firestore().collection('ChatUser').doc(paramMap.get('id')).collection(paramMap.get('id')).orderBy('time').onSnapshot(snap =>{
+    /*  firebase.firestore().collection('ChatUser').doc(paramMap.get('id')).collection(paramMap.get('id')).orderBy('time').onSnapshot(snap =>{
         this.mensajes = [];
         snap.forEach(element => {
           this.mensajes.push(element.data())
           
         });
-      })
+      })*/
+
+
 
 
     })
@@ -125,7 +139,7 @@ export class ChatPage implements OnInit {
     
     // })
     
-    //this.getMensajes();
+    this.getMensajes();
   }
 
   ampliar(codigo){
@@ -177,15 +191,15 @@ export class ChatPage implements OnInit {
     this.chatService.updateChat(this.idChat,this.chat)
   }
 
-  // getMensajes(){
-  //   var messageRef = firebase.database().ref().child('Chat')
-  //   messageRef.on("value", (snap) = > {
-  //     var data = snap.val();
-  //     for(var key in data){
-  //       this.
-  //     }
-  //   })
-  // }
+  getMensajes(){
+    this.http.post("http://localhost:3000/chat_id", {id: this.idChat})
+          .subscribe(data => {
+            console.log(data)
+            this.mensajes = data
+          }, error => {
+            console.log(error);
+    });
+  }
 
   bloquearMensajes(){
     if(this.miId == this.chat.user1.id){
@@ -291,9 +305,40 @@ export class ChatPage implements OnInit {
 
   send(){
 
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+
+      }
+    };
+
+    
+
     var fechaActual = new Date()
     console.log(this.idChat)
 
+    let json = {
+      idChat: this.idChat,
+      fecha: fechaActual.toString(),
+      mensaje: this.texto,
+      time: Date.now(),
+      emisor: this.miId,
+      receptor: this.idCompanero
+
+    }
+
+    this.http.post("http://localhost:3000/enviar_mensaje", json, options)
+      .subscribe(data => {
+        this.texto = ''
+        setTimeout(() => {
+          this.content.scrollToBottom(200)
+          
+        });
+       }, error => {
+        console.log(error);
+      });
+    console.log(json)
+/*
     if(this.texto != ''){
       console.log('aqui;' + this.texto)
       firebase.firestore().collection('ChatUser').doc(this.idChat).collection(this.idChat).add({
@@ -348,6 +393,8 @@ export class ChatPage implements OnInit {
       this.vistazo = false;
     }
     this.chatService.updateChat(this.idChat,this.chat)
+
+    */
     
 
   }

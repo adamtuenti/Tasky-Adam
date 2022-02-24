@@ -42,13 +42,20 @@
             </ion-avatar>
           </ion-segment-button>
 
+
+
+
           <ion-segment *ngFor='let chat of yalaChat' style = 'padding: 2.5px;'>
-            <ion-avatar style= 'margin-right: 7.5px' *ngIf = 'chat.mensaje < 0' [routerLink]="['/chat',chat.id, chat.user.id]">
+            <ion-avatar style= 'margin-right: 7.5px' *ngIf = 'chat.ultimoMensaje < 0'> //[routerLink]="['/chat',chat.id, chat.user.id]">
               <img src="{{chat.user.FotoPerfil}}" alet="foto">
   
             </ion-avatar>
 
           </ion-segment>
+
+
+
+
 
           
 

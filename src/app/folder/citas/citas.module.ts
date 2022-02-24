@@ -11,10 +11,16 @@ import { CitasPage } from './citas.page';
 
 import { ComponentsModule } from 'src/app/components/components.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   imports: [
     ComponentsModule,
     CommonModule,
+
+    HttpClientModule,
+
+
     // SwipeCardsModule,
     FormsModule,
     IonicModule,

@@ -14,6 +14,8 @@ import * as firebase from 'firebase';
 import { Gesture, GestureController, IonCard, Platform } from '@ionic/angular';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.page.html',
@@ -81,6 +83,7 @@ export class CitasPage implements AfterViewInit {
               private chatService: ChatService,
               private gestureCtrl: GestureController,
               private esperaService: EsperaChatService,
+              public http: HttpClient,
               private plt: Platform) { }
 
   ngOnInit() {
@@ -222,7 +225,8 @@ export class CitasPage implements AfterViewInit {
             this.solicitarAmistad(true, this.usuariosGustos[i])
             card.nativeElement.style.transform = `translateX(${+this.plt.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
           }else if(ev.deltaX < -172){
-            this.solicitarAmistad(false, this.usuariosGustos[i])//.id, this.citas[i].Nombre, this.citas[i])
+            //this.solicitarAmistad(false, this.usuariosGustos[i])//.id, this.citas[i].Nombre, this.citas[i])
+            this.validarChat(this.usuariosGustos[i]) //acaaa
             card.nativeElement.style.transform = `translateX(-${+this.plt.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
           }else{
             card.nativeElement.style.transform = ''
@@ -372,20 +376,15 @@ export class CitasPage implements AfterViewInit {
 
   }
 
+
+
   validarChat(userEnvio){
 
     var fechaActual = new Date();
 
-    var json = {user1: userEnvio, user2: this.user, bloqueo1: false, bloqueo2: false, ultimoMensaje: -1, visto1: false, visto2: false, Visibilidad: true, timeMatch: Date.now(), fechaMatch: fechaActual.toString() }
-    // this.nuevoChat.user1 = userEnvio;
-    // this.nuevoChat.user2 = this.user;
-    // this.nuevoChat.bloqueo1 = false;
-    // this.nuevoChat.bloqueo2 = false;
-    // this.nuevoChat.ultimoMensaje = -1;
-    // this.nuevoChat.visto1 = false;
-    // this.nuevoChat.visto2 = false;
-    // this.nuevoChat.Visibilidad = true;
-
+    //var json = {user1: userEnvio, user2: this.user, ultimoMensaje: -1, Visibilidad: true, timeMatch: Date.now(), fechaMatch: fechaActual.toString() }
+    console.log(json)
+    var json = {user1: userEnvio.id, user2: this.user.id, ultimoMensaje: -1, Visibilidad: true, fechaMatch: fechaActual.toString() }
     var bool = false;
 
 
@@ -398,7 +397,21 @@ export class CitasPage implements AfterViewInit {
 
     // if(bool == false){
 
-      firebase.firestore().collection("ChatUser").add(json)
+      this.http.post("http://localhost:3000/crear_match", json)
+      .subscribe(data => {
+        console.log('listo')
+
+       }, error => {
+        console.log(error);
+      });
+
+
+     // firebase.firestore().collection("ChatUser").add(json)
+
+
+
+
+
       // this.chatService.addChat(json).then(
       // //this.router.navigate(['/chat',this.nuevoChat.id, this.idCita])
       //  )

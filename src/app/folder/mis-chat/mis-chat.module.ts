@@ -9,12 +9,15 @@ import { ComponentsModule } from 'src/app/components/components.module';
 
 import { MisChatPage } from './mis-chat.page';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ComponentsModule,
     IonicModule,
+    HttpClientModule,
     MisChatPageRoutingModule
   ],
   declarations: [MisChatPage]

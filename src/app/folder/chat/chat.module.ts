@@ -9,13 +9,17 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ChatPage } from './chat.page';
 import { FullScreenImage } from '@ionic-native/full-screen-image';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ComponentsModule,
-    ChatPageRoutingModule
+    ChatPageRoutingModule,
+    HttpClientModule 
   ],
   declarations: [ChatPage]
 })
