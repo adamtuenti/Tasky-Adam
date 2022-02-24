@@ -153,13 +153,17 @@ export class PerfilPage implements OnInit {
   reActivarChat(){
     this.user.Citas = true;
     this.usuarioService.updateUsuario(localStorage.getItem('userId'),this.user)
-    for(let i=0; i< this.arregloChat.length; i++){
+
+
+    /*for(let i=0; i< this.arregloChat.length; i++){
       if(this.arregloChat[i].user1 == this.miId || this.arregloChat[i].user2 == this.miId){
         this.arregloChat[i].Visibilidad = true
         console.log('aqui')
         this.chatService.updateChat(this.arregloChat[i].id, this.arregloChat[i])
       }
-    }
+    }*/
+
+    
     this.router.navigateByUrl("/citas")
 
   }

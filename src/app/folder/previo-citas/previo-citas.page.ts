@@ -11,6 +11,10 @@ import { Citas } from 'src/app/models/citas';
 import { Usuarios } from 'src/app/models/usuarios';
 
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+
 @Component({
   selector: 'app-previo-citas',
   templateUrl: './previo-citas.page.html',
@@ -28,6 +32,10 @@ export class PrevioCitasPage implements OnInit {
               public loadingController: LoadingController,
               private angularFireStorage: AngularFireStorage,
               private router: Router,
+
+              public http: HttpClient,
+
+
               private alertCtrt: AlertController,) { }
 
   ngOnInit() {
@@ -49,17 +57,34 @@ export class PrevioCitasPage implements OnInit {
     this.presentLoading("Espere por favor...");
    // this.cita.Apellido = this.usuario.Apellido;
    // this.cita.Nombre = this.usuario.Nombre;
-    this.usuario.Descripcion = form.value.descripcion;
+
+   let json = {
+     "idUser": localStorage.getItem('userId'),
+     "edad": form.value.nacimiento,
+     "nombre": this.usuario.Nombre,
+     "apellido": this.usuario.Apellido,
+     "descripcion": form.value.descripcion,
+     "busca": form.value.busca,
+     "sexo": form.value.sexo,
+     "activo": true,
+     "fotoPerfil": this.usuario.FotoPerfil,
+     "foto2": this.usuario.Foto2 
+   }
+
+
+   /* this.usuario.Descripcion = form.value.descripcion;
     this.usuario.Nacimiento = form.value.nacimiento;
     this.usuario.Busca = form.value.busca;
-    this.usuario.Sexo = form.value.sexo;
+    this.usuario.Sexo = form.value.sexo;*/
+
+
    // this.cita.Activa = true;
    // this.cita.Usuario = localStorage.getItem('userId')
  
    // console.log(this.cita)
     // this.guardarArchivo();
 
-    this.usuarioService.updateUsuario(localStorage.getItem('userId'),this.usuario).then(
+  /*  this.usuarioService.updateUsuario(localStorage.getItem('userId'),this.usuario).then(
       auth=>{
 
 
@@ -71,7 +96,19 @@ export class PrevioCitasPage implements OnInit {
         this.failedAlert("Algo salió mal, inténtelo de nuevo");
       })
 
+  */
+
+  this.http.post("http://localhost:3000/crear_usuario", {json: json})
+      .subscribe(data => {
+        this.router.navigate(["/mis-chat"])
+        this.loading.dismiss();
+       }, error => {
+        this.loading.dismiss();
+        this.failedAlert("Algo salió mal, inténtelo de nuevo");
+      });
+
   }
+
 
   // crearPublicacion(form){
   //   this.presentLoading("Espere por favor...");
