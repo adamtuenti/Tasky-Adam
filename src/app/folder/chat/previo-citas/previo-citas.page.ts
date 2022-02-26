@@ -69,7 +69,8 @@ export class PrevioCitasPage implements OnInit {
      "sexo": form.value.sexo,
      "activo": true,
      "fotoPerfil": this.usuario.FotoPerfil,
-     "foto2": this.usuario.Foto2 
+     "foto2": this.usuario.Foto2,
+     "esperandoo_match": []
    }
 
     this.usuario.Citas = true;
