@@ -9,7 +9,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Citas } from 'src/app/models/citas';
 import { Usuarios } from 'src/app/models/usuarios';
-
+import { environment } from 'src/environments/environment'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -27,6 +27,7 @@ export class PrevioCitasPage implements OnInit {
   cita: Citas = new Citas();
   loading: any;
   imageSrc: string | ArrayBuffer;
+  urlBack = environment.URL_BACKEND
   constructor(private citasService: CitasService,
               private usuarioService: UsuarioService,
               public loadingController: LoadingController,
@@ -53,7 +54,7 @@ export class PrevioCitasPage implements OnInit {
     }
   }
 
-  registrarCita(form){
+  async registrarCita(form){
     this.presentLoading("Espere por favor...");
    // this.cita.Apellido = this.usuario.Apellido;
    // this.cita.Nombre = this.usuario.Nombre;
@@ -70,6 +71,10 @@ export class PrevioCitasPage implements OnInit {
      "fotoPerfil": this.usuario.FotoPerfil,
      "foto2": this.usuario.Foto2 
    }
+
+    this.usuario.Citas = true;
+    this.usuario.Descripcion = form.value.descripcion;
+    this.usuarioService.updateUsuario(localStorage.getItem('userId'),this.usuario)
 
 
    /* this.usuario.Descripcion = form.value.descripcion;
@@ -97,15 +102,16 @@ export class PrevioCitasPage implements OnInit {
       })
 
   */
+  console.log(json)
+  this.loading.dismiss();
 
-  this.http.post("http://localhost:3000/crear_usuario", {json: json})
-      .subscribe(data => {
-        this.router.navigate(["/mis-chat"])
-        this.loading.dismiss();
-       }, error => {
-        this.loading.dismiss();
-        this.failedAlert("Algo salió mal, inténtelo de nuevo");
-      });
+
+  await this.http.post(this.urlBack + "/crear_usuario", json)
+
+  this.router.navigate(["/mis-chat"])
+
+  
+    
 
   }
 

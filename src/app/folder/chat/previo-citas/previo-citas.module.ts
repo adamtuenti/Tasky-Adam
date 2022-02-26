@@ -9,6 +9,8 @@ import { PrevioCitasPageRoutingModule } from './previo-citas-routing.module';
 import { PrevioCitasPage } from './previo-citas.page';
 
 import { ComponentsModule } from 'src/app/components/components.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
@@ -16,6 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     PrevioCitasPageRoutingModule
   ],
   declarations: [PrevioCitasPage]

@@ -384,7 +384,7 @@ export class CitasPage implements AfterViewInit {
 
     //var json = {user1: userEnvio, user2: this.user, ultimoMensaje: -1, Visibilidad: true, timeMatch: Date.now(), fechaMatch: fechaActual.toString() }
     console.log(json)
-    var json = {user1: userEnvio.id, user2: this.user.id, ultimoMensaje: -1, Visibilidad: true, fechaMatch: fechaActual.toString() }
+    var json = {user1: userEnvio.id, user2: this.user.id, ultimoMensaje: -1, Visibilidad: true, fechaMatch: fechaActual.toString(), enEspera: true }
     var bool = false;
 
 
