@@ -10,6 +10,12 @@ import { MensajeErrorService } from 'src/app/services/mensaje-error.service';
 import { ChatUser } from 'src/app/models/ChatUser';
 import { ChatService } from 'src/app/services/chat.service';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment'
+
+
+
 @Component({
   selector: 'app-mi-perfil-cita',
   templateUrl: './mi-perfil-cita.page.html',
@@ -23,21 +29,42 @@ export class MiPerfilCitaPage implements OnInit {
   loading: HTMLIonLoadingElement;
   miId;
 
+  urlBack = environment.URL_BACKEND
+
+  
+
   public arregloChat: ChatUser[]= [];
 
   constructor(private usuarioService: UsuarioService,
               private angularFireStorage: AngularFireStorage,
               public loadingController: LoadingController,              
               private alertCtrt: AlertController,
+
+              public http: HttpClient,
+
+
               private router: Router,
               private chatService: ChatService,
               private mensajeErrorService: MensajeErrorService,
               ) { }
 
   ngOnInit() {
-    this.miId = localStorage.getItem('userId')
+   /* this.miId = localStorage.getItem('userId')
     this.chatService.getChats().subscribe(res => {this.arregloChat =res;});
-    this.usuarioService.getUsuario(localStorage.getItem('userId')).subscribe(res => {this.user =res;});
+    this.usuarioService.getUsuario(localStorage.getItem('userId')).subscribe(res => {this.user =res;});*/
+
+    this.http.post(this.urlBack + "/mi_perfil", {idUser: localStorage.getItem('userId')})
+      .subscribe(data => {
+        //this.posiblesMatch = data
+        this.user = data[0];
+        console.log(data[0].nombre)
+      
+        
+
+          
+      }, error => {
+      console.log(error);
+    });
 
   }
 

@@ -9,12 +9,20 @@ import { MiPerfilCitaPageRoutingModule } from './mi-perfil-cita-routing.module';
 import { MiPerfilCitaPage } from './mi-perfil-cita.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
     FormsModule,
+
+    HttpClientModule,
+
+    
     IonicModule,
     MiPerfilCitaPageRoutingModule
   ],

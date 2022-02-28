@@ -11,12 +11,17 @@ import { PerfilCitaPage } from './perfil-cita.page';
 
 
 
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     PerfilCitaPageRoutingModule
   ],
   declarations: [PerfilCitaPage]

@@ -33,14 +33,14 @@
     
 
 
-      <ion-card *ngFor="let cita of usuariosGustos" [style.position] = "'absolute'">
+      <ion-card *ngFor="let cita of posiblesMatch" [style.position] = "'absolute'">
 
         <ng-container>
 
-          <img src="{{cita.FotoPerfil}}" style="height: 450px;width: 450px;margin-bottom: 3.5px;"/>
+          <img src="{{cita.fotoPerfil}}" style="height: 450px;width: 450px;margin-bottom: 3.5px;"/>
 
           <ion-fab vertical="start" horizontal="end">
-            <ion-fab-button [routerLink]="['/perfil-cita',cita.id]">
+            <ion-fab-button [routerLink]="['/perfil-cita', cita.idUser]">
             <ion-icon name="information" size = 'large'></ion-icon>
             </ion-fab-button>
           </ion-fab>
@@ -55,7 +55,7 @@
           
         <ion-card-header>
           <ion-card-title>
-            <ion-label style = 'font-size: 25px;font-weight: bold;margin-bottom: 7.5px;'>{{cita.Nombre}} {{cita.Apellido}}</ion-label>
+            <ion-label style = 'font-size: 25px;font-weight: bold;margin-bottom: 7.5px;'>{{cita.nombre}} {{cita.apellido}}</ion-label>
           </ion-card-title>
             
 

@@ -42,7 +42,7 @@ export class ChatPage implements OnInit {
   miId;
   idCompanero;
   mensajes: any = []
-  companero: Usuarios = new Usuarios();
+  companero = '';
   bloqueo = false;
   miBloqueo = false;
   public vistazo = false;
@@ -81,13 +81,15 @@ export class ChatPage implements OnInit {
       this.idCompanero = paramMap.get('idCompanero');
       this.miId = localStorage.getItem('userId')
       // this.chatService.getChat(this.idChat).subscribe(res => {this.chat =res;this.validarVistos()});
-      this.usuarioService.getUsuario(paramMap.get('idCompanero')).subscribe(res => {this.companero = res;console.log(this.companero)});
+      
+      
+      /*//this.usuarioService.getUsuario(paramMap.get('idCompanero')).subscribe(res => {this.companero = res;console.log(this.companero)});
 
       firebase.firestore().collection('ChatUser').doc(paramMap.get('id')).onSnapshot(snap =>{
         this.chat = snap.data();
         //this.validarVistos()
           
-      })
+      })*/
 
       this.http.post(this.urlBack + "chat_id", {id: paramMap.get('id')})
       .subscribe(data => {
@@ -96,6 +98,21 @@ export class ChatPage implements OnInit {
        }, error => {
         console.log(error);
       });
+
+
+      this.http.post(this.urlBack + "/mi_perfil", {idUser: paramMap.get('idCompanero')})
+      .subscribe(data => {
+        //this.posiblesMatch = data
+        this.companero = data[0];
+        console.log('companero: ', data[0])
+        
+
+          
+        }, error => {
+        console.log(error);
+      });
+
+
       
 
     /*  firebase.firestore().collection('ChatUser').doc(paramMap.get('id')).collection(paramMap.get('id')).orderBy('time').onSnapshot(snap =>{
@@ -222,7 +239,7 @@ export class ChatPage implements OnInit {
     this.chatService.updateChat(this.idChat,this.chat)
   }
 
-  validarBloqueo(){
+  /*validarBloqueo(){
     if(this.miId == this.chat.user1){
       if(this.chat.bloqueo1){
         this.alertaDesbloquear()
@@ -240,12 +257,12 @@ export class ChatPage implements OnInit {
 
     this.miBloqueo = true;
 
-  }
+  }*/
 
   async alertaBloquear() {
     const alert = await this.alertCtrt.create({
      cssClass: 'my-custom-class',
-     header: "¿Deseas bloquear los mensajes de " + this.companero.Nombre + "?",
+     header: "¿Deseas cancelar el match?",
     buttons: [
         {
           text: 'Bloquear',
@@ -268,10 +285,10 @@ export class ChatPage implements OnInit {
     await alert.present();
   }
 
-  async alertaDesbloquear() {
+  /*async alertaDesbloquear() {
     const alert = await this.alertCtrt.create({
      cssClass: 'my-custom-class',
-     header: "¿Deseas desbloquear los mensajes de " + this.companero.Nombre + "?",
+     header: "¿Deseas desbloquear los mensajes de " + this.companero.nombre + "?",
     buttons: [
         {
           text: 'Desbloquear',
@@ -292,7 +309,7 @@ export class ChatPage implements OnInit {
       ]
     });
     await alert.present();
-  }
+  }*/
 
   validarEnvio(){
     if(this.bloqueo == false){

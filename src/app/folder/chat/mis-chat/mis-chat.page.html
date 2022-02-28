@@ -108,15 +108,15 @@
   
 
 
-  <ion-list *ngFor='let chat of yalaChat'>
+  <ion-list *ngFor='let chat of misChats'>
 
-    <ion-item [routerLink]="['/chat',chat.id, chat.user.id]" *ngIf = 'chat.mensaje > -1'>
+    <ion-item [routerLink]="['/chat', chat._id, chat.user.idUser]" >
 
       <ion-avatar slot="start" slot="start" style='height: 68px;width: 68px;'>
-        <img src="{{chat.user.FotoPerfil}}" alet="foto">
+        <img src="{{chat.user.fotoPerfil}}" alet="foto">
       </ion-avatar>
   
-      <ion-label style = 'color:black;font-size: 17.1px;font-size:bold'>{{chat.user.Nombre}} {{chat.user.Apellido}}</ion-label>
+      <ion-label style = 'color:black;font-size: 17.1px;font-size:bold'>{{chat.user.nombre}} {{chat.user.apellido}}</ion-label>
     
     </ion-item>
 

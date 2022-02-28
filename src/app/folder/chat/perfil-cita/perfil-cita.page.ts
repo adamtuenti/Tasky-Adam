@@ -10,6 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ChatUser } from 'src/app/models/ChatUser';
 import { ChatService } from 'src/app/services/chat.service';
 
+
+
+import { environment } from 'src/environments/environment'
+
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+
 @Component({
   selector: 'app-perfil-cita',
   templateUrl: './perfil-cita.page.html',
@@ -17,9 +26,14 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class PerfilCitaPage implements OnInit {
 
+  urlBack = environment.URL_BACKEND
+
+
+
   idCita;
   public edad;
-  public cita: Usuarios=new Usuarios();
+  //public cita;
+  public citaU = '';
   miId;
   public arregloChat: ChatUser[]= [];
   public nuevoChat: ChatUser = new ChatUser();
@@ -45,18 +59,51 @@ export class PerfilCitaPage implements OnInit {
   constructor(private usuarioService: UsuarioService,
               private chatService: ChatService,
               private router: Router,
+
+              public http: HttpClient,
+
+
               private modalController: ModalController,
               private activateRoute: ActivatedRoute,) { }
 
-  ngOnInit() {
-    this.miId = localStorage.getItem('userId')
+  ngOnInit(){
 
-    this.activateRoute.paramMap.subscribe(paramMap => {
+  }
+
+  ionViewWillEnter() {
+    this.miId = localStorage.getItem('userId')
+     this.activateRoute.paramMap.subscribe(paramMap => {
       this.idCita = paramMap.get('idUser');
-      this.chatService.getChats().subscribe(res => {this.arregloChat =res;});
-      this.usuarioService.getUsuario(paramMap.get('idUser')).subscribe(res => {this.cita =res;this.calcularEdad()});
+
+      this.http.post(this.urlBack + "/mi_perfil", {idUser: paramMap.get('idUser')})
+      .subscribe(data => {
+        //this.posiblesMatch = data
+        this.citaU = data[0];
+        console.log(data[0].nombre)
+        const convertAge = new Date(data[0].edad);
+        const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+        this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+        console.log(this.edad)
+        
+
+          
+      }, error => {
+      console.log(error);
+    });
+
+
+
+      //this.chatService.getChats().subscribe(res => {this.arregloChat =res;});
+      //this.usuarioService.getUsuario(paramMap.get('idUser')).subscribe(res => {this.citaU =res;this.calcularEdad()});
   
     });
+
+
+    
+
+
+
+   
   
 
   }
@@ -72,11 +119,11 @@ export class PerfilCitaPage implements OnInit {
   //   modal.present();
   // }
 
-  calcularEdad(){
-    const convertAge = new Date(this.cita.Nacimiento);
+ /* calcularEdad(){
+    const convertAge = new Date(this.citaU.edad);
     const timeDiff = Math.abs(Date.now() - convertAge.getTime());
     this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
-  }
+  }*/
 
 
   validarChat(){

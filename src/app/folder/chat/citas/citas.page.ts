@@ -16,6 +16,10 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
+import { environment } from 'src/environments/environment'
+
+
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.page.html',
@@ -26,10 +30,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class CitasPage implements AfterViewInit {
 
+  urlBack = environment.URL_BACKEND
+
+
+
 
   usuarios:Usuarios[] = [];
   citas = [];
-  public user: Usuarios = new Usuarios();
+ // public user: Usuarios = new Usuarios();
   public chatEsperas: esperaChat[] = [];
 
   public arregloChat: ChatUser[]= [];
@@ -53,22 +61,11 @@ export class CitasPage implements AfterViewInit {
   longPressActive = false;
   vacio = false;
 
-  people = [
-    {
-    name: 'Goku',
-    img: 'https://sm.ign.com/t/ign_latam/screenshot/default/goku-susanoo_7by3.1200.jpg'
-    },
 
-    {
-    name: 'Vegeta',
-    img: 'https://depor.com/resizer/lzErRA9bNnXilyX-qkHh90byA3M=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/EZUULO3CDNESBLCGA65W3KWPZY.jpg'
-    },
-    {
-    name: 'Freezer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjgH1TPqQ7qz2KKp_HvHQGmK1wvklOyQmvN3zPd_Mz7QhuqrsRlbYy7zGqYDOE86Q7TvM&usqp=CAU'
-    }
-    
-    ]
+  posiblesMatch: any = []
+
+  user;
+
 
     
 
@@ -87,6 +84,34 @@ export class CitasPage implements AfterViewInit {
               private plt: Platform) { }
 
   ngOnInit() {
+
+    this.miId = localStorage.getItem('userId')
+    this.http.post(this.urlBack + "/mi_perfil", {idUser: localStorage.getItem('userId')})
+      .subscribe(data => {
+        //this.posiblesMatch = data
+       this.user = data[0];
+       console.log(data[0])
+   
+        
+
+          
+      }, error => {
+      console.log(error);
+    });
+
+    
+
+    this.http.post(this.urlBack + "/buscar_perfiles", {idUser: this.miId, "busca": "F", "sexo": "M"})
+      .subscribe(data => {
+        this.posiblesMatch = data
+        console.log('posibles: ', data)
+        
+
+          
+       }, error => {
+        console.log(error);
+      });
+  
 
     
     
@@ -112,59 +137,14 @@ export class CitasPage implements AfterViewInit {
     this.miId = localStorage.getItem('userId')
     
     
-    this.usuarioService.getUsuario(localStorage.getItem('userId')).subscribe(res => {this.user = res;this.lesTengoGanas();});
+    // --this.usuarioService.getUsuario(localStorage.getItem('userId')).subscribe(res => {this.user = res;this.lesTengoGanas();});
 
-    this.quierenConmigo()
+    // --this.quierenConmigo()
 
 
    // this.usuarioService.getUsuarios().subscribe(res => {this.usuarios = res;this.shuffle(this.usuarios);this.conseguirChat();});
   }
 
-  conseguirPersonas(){
-    //conseguir personas que coincidan con tus gustos
-    firebase.firestore().collection('Usuarios').where('Citas','==',true).where('Sexo','==',this.user.Busca).where('Busca','==',this.user.Sexo).onSnapshot(snap =>{
-      this.usuariosGustos = []
-      snap.forEach(element => {
-  
-
-        if(this.idDeseo.includes(element.data().id)){
-
-        }else{
-          if(element.data().id != localStorage.getItem('userId')){
-            this.usuariosGustos.push(element.data())
-          }
-        }
-      });
-
-      if(this.usuariosGustos.length == 0){
-        this.vacio = true
-      }
-
-    })
-  }
-
-  lesTengoGanas(){
-    firebase.firestore().collection('ChatEspera').where('usuarioEnvio','==',localStorage.getItem('userId')).onSnapshot(snap =>{
-      this.idDeseo = []
-      snap.forEach(element => {
-        this.idDeseo.push(element.data().esperaUsuario)
-      });
-      this.conseguirPersonas()
-    })
-  }
-
-
-  quierenConmigo(){
-    firebase.firestore().collection('ChatEspera').where('esperaUsuario','==',localStorage.getItem('userId')).onSnapshot(snap =>{
-      this.meDeseanId = []
-      this.meDesean = []
-      snap.forEach(element => {
-        this.meDeseanId.push(element.data().usuarioEnvio)
-        this.meDesean.push(element.data())
-      });
-    })
-
-  }
 
   after(){
     const cardArray = this.cards.toArray()
@@ -383,9 +363,10 @@ export class CitasPage implements AfterViewInit {
     var fechaActual = new Date();
 
     //var json = {user1: userEnvio, user2: this.user, ultimoMensaje: -1, Visibilidad: true, timeMatch: Date.now(), fechaMatch: fechaActual.toString() }
-    console.log(json)
-    var json = {user1: userEnvio.id, user2: this.user.id, ultimoMensaje: -1, Visibilidad: true, fechaMatch: fechaActual.toString(), enEspera: true }
+    
+    var json = {user1: userEnvio.idUser, user2: this.user.idUser, ultimoMensaje: -1, Visibilidad: true, bloqueo: false, fechaMatch: fechaActual.toString(), datos1: userEnvio, datos2: this.user }
     var bool = false;
+    console.log(json)
 
 
     // for(let i =0; i < this.arregloChat.length; i++){

@@ -35,7 +35,7 @@ export class MisChatPage implements OnInit {
 
   public usuarios: Usuarios[] = [];
   public idChats = [];
-  public misChats: Usuarios[]= [];
+  public misChats: any = [];
 
 
   yalaChat: any = []
@@ -43,6 +43,7 @@ export class MisChatPage implements OnInit {
    yalaChat1: any = []
   puedoChat = []
   sinChat = false;
+
 
   
 
@@ -117,30 +118,25 @@ export class MisChatPage implements OnInit {
             this.usuarioService.getUsuario(x.user1).subscribe(res => {userTemp =res; console.log(res)});
           }*/
 
-   /* this.http.post("http://localhost:3000/chats_user", {id: this.miId})
+          console.log('mi id: ', this.miId)
+
+   this.http.post("http://localhost:3000/chats_user", {id: this.miId})
       .subscribe(data => {
-        console.log(data)
-        JSON.parse(JSON.stringify(data)).map(data1 =>  {
-          if(data1.user1 == this.miId){
-            console.log('aqui: ', data1.user2)
-            this.usuarioService.getUsuario(data1.user2).subscribe(res => { this.yalaChat.push(res); console.log(res) });
-            
-          }
-          else{
-            this.usuarioService.getUsuario(data1.user1).subscribe(res => {this.yalaChat.push(res)});
-          }
-        });
+        this.misChats = data
+      /*  if(data[0].length == 0){
+          this.sinChat = true
+        }*/
           
-       }, error => {
+       }), error => {
         console.log(error);
-      });*/
+      };
 
     
     
 
 
     
-   firebase.firestore().collection('ChatUser').where('user2.id','==',localStorage.getItem('userId')).where('Visibilidad','==',true).onSnapshot(snap =>{
+   /*firebase.firestore().collection('ChatUser').where('user2.id','==',localStorage.getItem('userId')).where('Visibilidad','==',true).onSnapshot(snap =>{
 
           snap.forEach(element => {
             var json = { id: element.id, user: element.data().user1, mensaje: element.data().ultimoMensaje}
@@ -163,7 +159,7 @@ export class MisChatPage implements OnInit {
 
 
           //this.obtenerChats();
-     })
+     })*/
 
     
 

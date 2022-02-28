@@ -5,11 +5,11 @@
         <ion-icon name='caret-back-outline' size='large' [routerLink]="['/mis-chat']"></ion-icon>
         
         
-        <ion-avatar style='height: 50px;width: 50px;margin-bottom: 7.5px;margin-left: 7.5px;' [routerLink]="['/perfil-cita',companero.id]">
-            <img src="{{companero.FotoPerfil}}" alet="foto">
+        <ion-avatar style='height: 50px;width: 50px;margin-bottom: 7.5px;margin-left: 7.5px;' [routerLink]="['/perfil-cita',companero.idUser]">
+            <img src="{{companero.fotoPerfil}}" alet="foto">
         </ion-avatar>
     
-        <ion-label style='font-size: 18.2px;margin-left:12.5px'>{{companero.Nombre}}</ion-label>
+        <ion-label style='font-size: 17.4px;margin-left:12.5px'>{{companero.nombre}} {{companero.apellido}}</ion-label>
 
         <ion-icon name="ban-outline" slot='end' size='large' (click) = 'alertaBloquear()' color = 'danger' *ngIf= 'bloqueo == false && miBloqueo == false'></ion-icon>
         <ion-icon name="ban-outline" slot='end' size='large' *ngIf= 'bloqueo == true'></ion-icon>

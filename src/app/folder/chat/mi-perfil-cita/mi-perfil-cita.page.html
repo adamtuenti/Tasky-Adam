@@ -22,11 +22,11 @@
 
         
         <ion-slide style="height: 375px;width: 85%;margin: auto">
-          <ion-img src="{{user.FotoPerfil}}" style="height: 325px;width: 100%;"></ion-img>
+          <ion-img src="{{user.fotoPerfil}}" style="height: 325px;width: 100%;"></ion-img>
         </ion-slide>
 
-        <ion-slide *ngIf='user.Foto2!=""' style="height: 375px;width: 85%;margin: auto">
-          <ion-img src="{{user.Foto2}}" style="height: 325px;width: 100%;"></ion-img>
+        <ion-slide *ngIf='user.foto2!=""' style="height: 375px;width: 85%;margin: auto">
+          <ion-img src="{{user.foto2}}" style="height: 325px;width: 100%;"></ion-img>
           <!-- <ion-button expand="full" href="{{user.Foto2}}" color="light" style="height: 100%;width: 100%;" fill="clear"><ion-img src="{{user.Foto2}}" style="height: 275px;width: 100%;"></ion-img></ion-button> -->
         </ion-slide>
         
@@ -45,7 +45,7 @@
       </ion-card-title>
 
       <ion-card-content>
-        <ion-label style="font-size: 17px;">{{user.Descripcion}}</ion-label>
+        <ion-label style="font-size: 17px;">{{user.descripcion}}</ion-label>
 
       </ion-card-content>
 
@@ -61,8 +61,8 @@
       </ion-card-title>
 
       <ion-card-content>
-        <ion-label *ngIf = 'user.Busca == "F"' style="font-size: 17px;">Mujeres</ion-label>
-        <ion-label *ngIf = 'user.Busca == "M"' style="font-size: 17px;">Hombres</ion-label>
+        <ion-label *ngIf = 'user.busca == "F"' style="font-size: 17px;">Mujeres</ion-label>
+        <ion-label *ngIf = 'user.busca == "M"' style="font-size: 17px;">Hombres</ion-label>
 
       </ion-card-content>
 

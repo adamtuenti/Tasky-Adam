@@ -30,16 +30,16 @@
         <ion-slide style="margin: auto;height: 400px;width: 85%;">
 
           <div class = 'swiper-zoom-container'>
-            <img src="{{cita.FotoPerfil}}" style="height: 350px;width: 100%;"/>
+            <img src="{{citaU.fotoPerfil}}" style="height: 350px;width: 100%;"/>
 
           </div>
 
           
         </ion-slide>
-        <ion-slide *ngIf='cita.Foto2!=""' style="margin: auto;height: 400px;width: 85%;">
+        <ion-slide *ngIf='citaU.Foto2!=""' style="margin: auto;height: 400px;width: 85%;">
 
           <div class = 'swiper-zoom-container'>
-            <img src="{{cita.Foto2}}" style="height: 350px;width: 100%;"/>
+            <img src="{{citaU.foto2}}" style="height: 350px;width: 100%;"/>
           </div>
           
         </ion-slide>
@@ -54,12 +54,12 @@
 
       <ion-card-title style = 'padding: 7.5px;margin-top: 5px;'>
 
-        <ion-label style="font-size: 25px;font-weight: bold;margin-right: 9.2px;">{{cita.Nombre}} {{cita.Apellido}}</ion-label> <ion-label style = 'font-size: 19.1px;'>{{edad}}</ion-label>
+        <ion-label style="font-size: 25px;font-weight: bold;margin-right: 9.2px;">{{citaU.nombre}} {{citaU.apellido}}</ion-label> <ion-label style = 'font-size: 19.1px;'>{{edad}}</ion-label>
 
       </ion-card-title>
 
       <ion-card-content>
-        <ion-label style="font-size: 19.1px;">{{cita.Descripcion}}</ion-label>
+        <ion-label style="font-size: 19.1px;">{{citaU.descripcion}}</ion-label>
 
       </ion-card-content>
 
